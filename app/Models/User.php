@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\AuditLog;
 
 class User extends Authenticatable
 {
@@ -19,8 +20,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'username',
         'password',
+        'email',
+        'role',
     ];
 
     /**
@@ -39,7 +42,30 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        // 'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+        // Record audit trail for user creation
+
+        public function getRoleText()
+        {
+            switch ($this->role) {
+                case 0:
+                    return 'Staff';
+                case 1:
+                    return 'Admin';
+                case 2:
+                    return 'Campus In-charge - NLUC';
+                default:
+                    return 'Unknown';
+            }
+        }
+
+        public function isAdminOrCampusInCharge()
+        {
+            return in_array($this->role, [1, 2]);
+        }
+
+
 }
