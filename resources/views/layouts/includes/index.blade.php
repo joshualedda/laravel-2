@@ -3,7 +3,7 @@
 @include('layouts.includes.navbar')
 @include('layouts.includes.sidebar')
 
-<main class="main" id="main">
+<main id="main" class="main">
     @yield('content')
 </main>
 

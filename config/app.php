@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'DMMMSU'),
 
     /*
     |--------------------------------------------------------------------------
@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Manila',
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +168,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        PowerComponents\LivewirePowerGrid\Providers\PowerGridServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -184,5 +185,13 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
-
-];
+    'livewire' => [
+        'class' => \Livewire\Livewire::class,
+        'viewPath' => resource_path('views/livewire'),
+        'aliases' => [
+            // 'BackupDatabase' => App\Http\Livewire\BackupDatabase::class,
+            'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+            // 'Livewire' => App\Http\Livewire\Livewire::class,
+            ],
+        ],
+    ];

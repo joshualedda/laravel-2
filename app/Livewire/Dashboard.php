@@ -44,16 +44,13 @@ class Dashboard extends Component
         $this->fetchFilterOptions();
 
     }
-    
+
 
     public function render()
     {
-        return view('livewire.dashboard',
-        [
-            'government' => $this->government,
-        ])
-        ->extends('layouts.includes.index')
-        ->section('content');
+        // dd( $this->government);
+
+        return view('livewire.dashboard')->extends('layouts.includes.index')->section('content');
     }
 
     public function fetchFilterOptions()
@@ -68,7 +65,7 @@ class Dashboard extends Component
                             ->pluck('school_year');
     }
 
-  
+
 
     public function filterScholarship()
     {
@@ -93,7 +90,7 @@ class Dashboard extends Component
 
         $campusNames = Campus::pluck('campus_name')->toArray();
 
-        $this->emit('renderChart', ['data' => $studentCounts, 'labels' => $campusNames]);
+        $this->dispatch('renderChart', data: $studentCounts, labels: $campusNames);
     }
 
 }

@@ -4,7 +4,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link " href="{{ url('dashboard') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -13,15 +13,15 @@
 
         <li class="nav-item">
             <a class="nav-link" href="#">
-                <i class="bi bi-menu-button-wide"></i>
+                <i class="bi bi-person-plus"></i>
                 <span>Student</span>
             </a>
         </li>
         <!-- End Student Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span>Scholarships</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse">
+                <i class="bi bi-book"></i><span>Scholarships</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -41,7 +41,7 @@
         @can('admin-access')
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Settings</span><i
+                <i class="bi bi-wrench"></i><span>Settings</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -86,8 +86,8 @@
         @endcan
         @can('staff-access')
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Settings</span><i
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse">
+                <i class="bi bi-wrench"></i><span>Settings</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -123,7 +123,7 @@
         @can('incharge-access')
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Settings</span><i
+                <i class="bi bi-wrench"></i><span>Settings</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -159,7 +159,7 @@
 
     <li class="nav-item">
         <a class="nav-link" href="#">
-            <i class="bi bi-menu-button-wide"></i>
+            <i class="bi bi-clipboard-data"></i>
             <span>Reports</span>
         </a>
     </li>
@@ -167,7 +167,7 @@
 
     <li class="nav-item">
         <a class="nav-link" href="#">
-            <i class="bi bi-menu-button-wide"></i>
+            <i class="bi bi-arrow-left-circle"></i>
             <span>Log out</span>
         </a>
     </li>

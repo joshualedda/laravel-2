@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Dashboard;
+use App\Livewire\StudentAdd;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -15,11 +16,6 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 // log in
 Route::get('/auth/login', function () {
     return view('auth.login');
@@ -28,4 +24,7 @@ Route::get('login', [ LoginController::class, 'login'])->name('auth.login');
 Route::post('login', [ LoginController::class, 'loginAction'])->name('login.action');
 
 // dashboard
-Route::view('dashboard', 'livewire.dashboard')->name('dashboard');
+Route::get('dashboard', Dashboard::class)->name('dashboard');
+
+// Add Student
+Route::get('student-add', StudentAdd::class)->name('student-add');

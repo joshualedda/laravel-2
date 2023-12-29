@@ -22,6 +22,7 @@ body {
 a {
   color: #4154f1;
   text-decoration: none;
+  list-style:none;
 }
 
 a:hover {
@@ -222,6 +223,10 @@ h6 {
   border: none;
   border-radius: 5px;
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
 .card-header,
@@ -314,6 +319,10 @@ h6 {
 .breadcrumb a {
   color: #899bbd;
   transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
 }
 
 .breadcrumb a:hover {
@@ -361,19 +370,24 @@ h6 {
 @media (min-width: 1200px) {
   .logo {
     width: 280px;
-  }
+    cursor: pointer;
+}
 }
 
 .logo img {
-  max-height: 26px;
-  margin-right: 6px;
+  max-height: 50px;
+  margin-right: 10px;
+  text-decoration: none;
+  list-style: none;
 }
 
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #012970;
+  color: #000000;
   font-family: "Nunito", sans-serif;
+  text-decoration: none;
+  list-style: none;
 }
 
 .header {
@@ -381,10 +395,13 @@ h6 {
   z-index: 997;
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  /* background-color: #fff; */
   padding-left: 20px;
-  /* Toggle Sidebar Button */
-  /* Search Bar */
+    /* Toggle Sidebar Button */  /* Search Bar */
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
 }
 
 .header .toggle-sidebar-btn {
@@ -464,6 +481,8 @@ h6 {
 .header-nav>ul {
   margin: 0;
   padding: 0;
+  list-style:none;
+  text-decoration: none;
 }
 
 .header-nav .nav-icon {
@@ -473,17 +492,24 @@ h6 {
   position: relative;
 }
 
-.header-nav .nav-profile {
-  color: #012970;
+.nav-item .nav-profile h6,
+.nav-item .nav-profile span
+{
+  text-decoration:none ;
+  list-style:none;
 }
 
-.header-nav .nav-profile img {
-  max-height: 36px;
+.profile-name {
+  font-size:18px;
+  font-weight:600;
+  color:black;
+  margin-bottom:0;
 }
 
-.header-nav .nav-profile span {
+.profile-role {
   font-size: 14px;
   font-weight: 600;
+  color:black;
 }
 
 .header-nav .badge-number {
@@ -564,19 +590,11 @@ h6 {
 .header-nav .profile {
   min-width: 240px;
   padding-bottom: 0;
-  top: 8px !important;
+  top: 4px !important;
 }
 
-.header-nav .profile .dropdown-header h6 {
-  font-size: 18px;
-  margin-bottom: 0;
-  font-weight: 600;
-  color: #444444;
-}
 
-.header-nav .profile .dropdown-header span {
-  font-size: 14px;
-}
+
 
 .header-nav .profile .dropdown-item {
   font-size: 14px;
@@ -739,6 +757,7 @@ h6 {
   transition: 0.3;
   padding: 10px 0 10px 40px;
   transition: 0.3s;
+  text-decoration: none;
 }
 
 .sidebar-nav .nav-content a i {

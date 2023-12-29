@@ -1,11 +1,7 @@
 <div>
     <div class="pagetitle">
         <h1>Dashboard</h1>
-        <nav>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item active">Dashboard</li>
-          </ol>
-        </nav>
+
       </div>
     {{-- message --}}
 
@@ -122,7 +118,7 @@
     <div class="container">
         <div class="row justify-content-start">
             <div class="col-md-3">
-                <label for="fundSources" class="form-label">Recipient</label>
+                <label for="selectedSources" class="form-label">Recipient</label>
                 <select id="selectedSources" name="selectedSources" wire:model="selectedSources"
                     class="form-select form-select-sm mb-3">
                     <option selected>Select below...</option>
@@ -132,7 +128,7 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <label for="year" class="form-label">Select Year</label>
+                <label for="selectedYear" class="form-label">Select Year</label>
                 <select id="selectedYear" name="selectedYear" wire:model="selectedYear" class="form-select form-select">
                     <option selected>Select below...</option>
                     @foreach($years as $year)
@@ -142,7 +138,7 @@
             </div>
             <div class="col-md-3">
                 <label for="applyFilters" class="form-label">Filter</label>
-                <button class="btn btn-sm btn-primary form-control" wire:click="filterScholarship">Apply
+                <button id="applyFilters" class="btn btn-sm btn-primary form-control" wire:click="filterScholarship">Apply
                     Filters</button>
             </div>
         </div>
@@ -161,7 +157,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
-        document.addEventListener('livewire:load', function () {
+        document.addEventListener('livewire:init', function () {
         Livewire.on('renderChart', function (data) {
         const ctx = document.getElementById('myChart').getContext('2d');
 
