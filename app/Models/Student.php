@@ -87,16 +87,5 @@ class Student extends Model
                 return 'No info';
         }
     }
-    // public function getCampus()
-    // {
-    //     $value = $this->attributes['campus'];
-    //     switch($value){
-    //         case 1:
-    //             return 'Active';
-    //         case 1:
-    //             return 'Inactive';
-    //         default:
-    //             return 'No info';
-    //     }
-    // }
+
 }

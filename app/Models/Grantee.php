@@ -14,21 +14,12 @@ class Grantee extends Model
         'student_id',
         'semester',
         'school_year',
-        // 'scholarship_type_1',
-        // 'scholarship_name_1',
-        // 'scholarship_type_2',
-        // 'scholarship_name_2',
+        'scholarship_name',
+        'scholarship_type',
     ];
-    // public function student()
-    // {
-    //     return $this->belongsTo(Student::class);
-    // }
-    public function studentGrantee()
-    {
-        return $this->hasMany(StudentGrantee::class, 'grantees_id');
-    }
+
     public function scholarshipName()
     {
-        return $this->belongsTo(ScholarshipName::class, 'scholarship_name');
+        return $this->belongsTo(ScholarshipName::class);
     }
 }

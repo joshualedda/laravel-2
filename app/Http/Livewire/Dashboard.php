@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Http\Livewire;
 
 use App\Models\Campus;
 use App\Models\Student;
@@ -90,7 +90,7 @@ class Dashboard extends Component
 
         $campusNames = Campus::pluck('campus_name')->toArray();
 
-        $this->dispatch('renderChart', data: $studentCounts, labels: $campusNames);
+        $this->emit('renderChart', data: $studentCounts, labels: $campusNames);
     }
 
 }

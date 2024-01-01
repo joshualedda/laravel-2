@@ -12,7 +12,7 @@
         <!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ url('student') }}">
                 <i class="bi bi-person-plus"></i>
                 <span>Student</span>
             </a>

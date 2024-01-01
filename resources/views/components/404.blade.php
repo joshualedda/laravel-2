@@ -17,7 +17,7 @@
                     <div class="row mt-5">
                         <div class="col-12 text-center mt-xl-2">
                             <a class="text-dark fw-bolder btn btn-md btn-gradient-danger"
-                                href="{{ route('login') }}">Back to home</a>
+                                href="{{ route('auth.login') }}">Back to home</a>
                         </div>
                     </div>
                     <div class="row mt-5">

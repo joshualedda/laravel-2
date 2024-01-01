@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Models\Region;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Municipal;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Province extends Model
 {
@@ -16,5 +17,9 @@ class Province extends Model
     public function region()
     {
         return $this->belongsTo(Region::class, 'id');
+    }
+    public function municipals()
+    {
+        return $this->hasMany(Municipal::class, 'provCode');
     }
 }

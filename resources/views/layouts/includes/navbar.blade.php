@@ -1,22 +1,24 @@
-@if(Auth::user()->role === 1)
-<style>
-#header {
-background-color:lightcoral;
-}
-</style>
-@elseif(Auth::user()->role === 0)
-<style>
-#header {
-background-color:lightyellow;
-}
-</style>
-@elseif(Auth::user()->role === 2)
-<style>
-#header {
-background-color:lightgreen;
-}
-</style>
-@endif
+
+    @if (Auth::user()->role === 1)
+        <style>
+            #header {
+                background-color: lightcoral;
+            }
+        </style>
+    @elseif (Auth::user()->role === 0)
+        <style>
+            #header {
+                background-color: lightyellow;
+            }
+        </style>
+    @elseif (Auth::user()->role === 2)
+        <style>
+            #header {
+                background-color: lightgreen;
+            }
+        </style>
+    @endif
+
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -60,8 +62,7 @@ background-color:lightgreen;
 
 
             <li class="nav-item pe-3">
-
-                <div class="nav-profile align-items-center p-2" href="#">
+                <div class="nav-profile align-items-center p-2">
                     <h6 class="profile-name">{{ auth()->user()->name }}</h6>
                     <span class="profile-role">{{ auth()->user()->getRoleText() }}</span>
                 </div>
