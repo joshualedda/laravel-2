@@ -1,3 +1,4 @@
+use App\Livewire\AddUser;
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -25,15 +26,15 @@
             </a>
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="forms-elements.html">
+                    <a href="{{ url('viewGrantee') }}">
                         <i class="bi bi-circle"></i><span>View</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="forms-layouts.html">
                         <i class="bi bi-circle"></i><span>Grantee</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </li>
         <!-- End Scholarship Nav -->
@@ -46,37 +47,37 @@
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="tables-general.html">
+                    <a href="{{ url('userAccount') }}">
                         <i class="bi bi-circle"></i><span>Account Settings</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
+                    <a href="{{ url('scholarView') }}">
                         <i class="bi bi-circle"></i><span>Add Scholarships</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-general.html">
+                    <a href="{{ url('registerUser' )}}">
                         <i class="bi bi-circle"></i><span>Add User Accounts</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
+                    <a href="{{ url('auditTrail') }}">
                         <i class="bi bi-circle"></i><span>Audit Trail</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-general.html">
+                    <a href="{{ url('backUp') }}">
                         <i class="bi bi-circle"></i><span>Data back-up</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-general.html">
+                    <a href="{{ url('programCampus') }}">
                         <i class="bi bi-circle"></i><span>Programs</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
+                    <a href="{{ url('schoolYear') }}">
                         <i class="bi bi-circle"></i><span>School Year</span>
                     </a>
                 </li>
@@ -92,27 +93,27 @@
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="tables-data.html">
+                    <a  href="{{ url('scholarView') }}">
                         <i class="bi bi-circle"></i><span>Add Scholarships</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
+                    <a href="{{ url('auditTrail') }}">
                         <i class="bi bi-circle"></i><span>Audit Trail</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-general.html">
+                    <a href="{{url('backUp')}}">
                         <i class="bi bi-circle"></i><span>Data back-up</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-general.html">
+                    <a href="{{ url('programCampus') }}">
                         <i class="bi bi-circle"></i><span>Programs</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
+                    <a href="{{ url('schoolYear') }}">
                         <i class="bi bi-circle"></i><span>School Year</span>
                     </a>
                 </li>
@@ -128,26 +129,21 @@
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="tables-data.html">
+                    <a  href="{{ url('scholarView') }}">
                         <i class="bi bi-circle"></i><span>Add Scholarships</span>
                     </a>
                 </li>
-                <a href="tables-data.html">
+                <a href="{{ url('auditTrail') }}">
                     <i class="bi bi-circle"></i><span>Audit Trail</span>
                 </a>
         </li>
         <li>
-            <a href="tables-general.html">
-                <i class="bi bi-circle"></i><span>Data back-up</span>
-            </a>
-        </li>
-        <li>
-            <a href="tables-general.html">
+            <a href="{{ url('programCampus') }}">
                 <i class="bi bi-circle"></i><span>Programs</span>
             </a>
         </li>
         <li>
-            <a href="tables-data.html">
+            <a href="{{ url('schoolYear') }}">
                 <i class="bi bi-circle"></i><span>School Year</span>
             </a>
         </li>
@@ -158,7 +154,7 @@
     @endcan
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ url('studentReports') }}">
             <i class="bi bi-clipboard-data"></i>
             <span>Reports</span>
         </a>

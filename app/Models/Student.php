@@ -87,5 +87,17 @@ class Student extends Model
                 return 'No info';
         }
     }
+    public function getTextAttribute()
+    {
+        $value = $this->attributes['scholarship_type'];
+        switch ($value) {
+            case 0:
+                return 'Government';
+            case 1:
+                return 'Private';
+            default:
+                return 'No info';
+        }
+    }
 
 }

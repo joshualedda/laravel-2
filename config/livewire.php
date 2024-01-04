@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'class_namespace' => 'App\\Http\\Livewire',
+    'class_namespace' => 'App\\Livewire',
 
     /*
     |---------------------------------------------------------------------------
@@ -156,7 +156,4 @@ return [
     */
 
     'pagination_theme' => 'bootstrap',
-
-    'debug' => true,
-
 ];

@@ -18,12 +18,13 @@
                                         <div class="input-group">
                                             <input type="text" id="student_id" class="form-control form-control-sm"
                                                 name="student_id" maxlength="10" aria-describedby="studentIdHelp"
-                                                wire:model="student_id">
+                                                wire:model.live="student_id">
 
                                             <button type="button" class="btn btn-primary" wire:click="studentSearch"
                                                 wire:loading.attr="disabled">
                                                 <i class="fas fa-search"></i>
                                             </button>
+                                            <span wire:loading>Filltering...</span>
                                         </div>
                                         <small id="studentIdHelp" class="form-text text-muted">Enter the 8-digit student
                                             ID.</small>
@@ -65,10 +66,10 @@
                                     <div class="col">
                                         @if($campuses)
                                         @foreach ($campuses as $campus)
-                                        <label class="form-check-label" for="campus_{{ $campus->id }}">
+                                        <label class="form-check-label" for="selectedCampus">
                                             <input class="form-check-input campus-radio" type="radio"
-                                                wire:model="selectedCampus" value="{{ $campus->id }}"
-                                                id="campus_{{ $campus->id }}" name="selectedCampus">
+                                                wire:model.live="selectedCampus" value="{{ $campus->id }}"
+                                                id="campus_{{ $campus->id }}" name="selectedCampus" @if($selectedCampus) disabled @endif>
                                             {{ $campus->campus_name }}
                                         </label>
                                         @endforeach
@@ -88,7 +89,7 @@
                                     <label class="form-check-label">
                                         <input class="form-check-input @error('studentType') is-invalid @enderror"
                                             type="radio" name="studentType" id="check{{ $type }}" value="{{ $type }}"
-                                            wire:model="studentType"
+                                            wire:model.live="studentType"
                                             wire:click="toggleNewInput({{ $type === 'New' ? 'true' : 'false' }})"
                                             style="margin-right: 5px;"> {{ $type }}
                                     </label>
@@ -104,9 +105,9 @@
 
                             <div class="col-md-4 mx-3 my-1" id="newInput" style="display: @if ($showNewInput) block @else none @endif;">
                                 <label for="nameSchool"><span class="text-danger">*</span> If new, indicate name of school last attended:</label>
-                                <input type="text" class="form-control form-control-sm" name="nameSchool" id="nameSchool" wire:model.defer="nameSchool">
+                                <input type="text" class="form-control form-control-sm" name="nameSchool" id="nameSchool" wire:model.live="nameSchool">
                                 <label for="lastYear"><span class="text-danger">*</span> School year last attended:</label>
-                                <input type="text" class="form-control form-control-sm" name="lastYear" id="lastYear" wire:model.defer="lastYear">
+                                <input type="text" class="form-control form-control-sm" name="lastYear" id="lastYear" wire:model.live="lastYear">
                             </div>
 
 
@@ -117,7 +118,7 @@
                                     <label class="form-label" for="lastname">Last name</label>
                                     <input type="text" id="lastname"
                                         class="form-control form-control-sm @error('lastname') is-invalid @enderror"
-                                        wire:model="lastname" name="lastname" />
+                                        wire:model.live="lastname" name="lastname" />
                                     @error('lastname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -129,7 +130,7 @@
                                     <label class="form-label" for="firstname">First name</label>
                                     <input type="text" id="firstname"
                                         class="form-control form-control-sm @error('firstname') is-invalid @enderror"
-                                        wire:model="firstname" name="firstname" />
+                                        wire:model.live="firstname" name="firstname" />
                                     @error('firstname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -141,7 +142,7 @@
                                     <label class="form-label" for="initial" name="initial">Middle Initial</label>
                                     <input type="text" id="initial"
                                         class="form-control form-control-sm @error('initial') is-invalid @enderror"
-                                        wire:model="initial" name="initial" />
+                                        wire:model.live="initial" name="initial" />
                                     @error('initial')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -154,7 +155,7 @@
                             <div class="row">
                                 <div class="col-md-4 position-relative mt-0">
                                     <label class="form-label">Province</label>
-                                    <select class="form-select" wire:model="selectedProvince"
+                                    <select class="form-select" wire:model.live="selectedProvince"
                                         name="selectedProvince">
                                         <option value="" selected>Select Province</option>
                                         @foreach ($provinces as $province)
@@ -170,7 +171,7 @@
 
                                 <div class="col-md-4 position-relative mt-0">
                                     <label class="form-label">City/Municipality</label>
-                                    <select class="form-select" wire:model="selectedMunicipality"
+                                    <select class="form-select" wire:model.live="selectedMunicipality"
                                         name="selectedMunicipality">
                                         <option value="" selected>Select City/Municipality</option>
                                         @foreach ($municipalities as $municipality)
@@ -187,7 +188,7 @@
 
                                 <div class="col-md-4 position-relative mt-0">
                                     <label class="form-label">Barangay</label>
-                                    <select class="form-select" wire:model="selectedBarangay"
+                                    <select class="form-select" wire:model.live="selectedBarangay"
                                         name="selectedBarangay">
                                         <option value="" selected>Select Barangay</option>
                                         @foreach ($barangays as $barangay)
@@ -209,12 +210,12 @@
                                         <label for="sex" class="fw-bold mx-5">Sex:</label>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input @error('sex') is-invalid @enderror mx-2"
-                                                type="radio" id="male" value="Male" wire:model="sex" name="sex">
+                                                type="radio" id="male" value="Male" wire:model.live="sex" name="sex">
                                             <label class="form-check-label m-0" for="sex">Male</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input @error('sex') is-invalid @enderror"
-                                                type="radio" id="female" value="Female" wire:model="sex"
+                                                type="radio" id="female" value="Female" wire:model.live="sex"
                                                 name="sex">
                                             <label class="form-check-label m-0" for="sex">Female</label>
                                         </div>
@@ -232,13 +233,13 @@
                                         <label for="status" class="fw-bold mx-5">Civil Status:</label>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input @error('status') is-invalid @enderror"
-                                                type="radio" id="single" value="Single" wire:model="status"
+                                                type="radio" id="single" value="Single" wire:model.live="status"
                                                 name="status">
                                             <label class="form-check-label m-0" for="status">Single</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input @error('status') is-invalid @enderror"
-                                                type="radio" id="married" value="Married" wire:model="status"
+                                                type="radio" id="married" value="Married" wire:model.live="status"
                                                 name="status">
                                             <label class="form-check-label m-0" for="status">Married</label>
                                         </div>
@@ -255,7 +256,7 @@
                                         Number</label>
                                     <input type="text" id="contact"
                                         class="form-control form-control-sm @error('contact') is-invalid @enderror"
-                                        wire:model="contact" maxlength="11" minlength="11" name="contact" />
+                                        wire:model.live="contact" maxlength="11" minlength="11" name="contact" />
                                     @error('contact')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -267,7 +268,7 @@
                                     <label class="form-label" for="email">Email Address</label>
                                     <input type="email" id="email"
                                         class="form-control form-control-sm @error('email') is-invalid @enderror"
-                                        wire:model="email" name="email" />
+                                        wire:model.live="email" name="email" />
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -282,7 +283,7 @@
                                     <label class="form-label">Year level</label>
                                     <select name="level" id="level"
                                         class="@error('level') is-invalid @enderror form-select form-select-md text-center"
-                                        wire:model="level">
+                                        wire:model.live="level">
                                         <option selected>Select year level</option>
                                         @foreach (['1','2','3','4','5','6'] as $yearLevel )
                                         <option value="{{ $yearLevel }}">{{ $yearLevel }}</option>
@@ -299,7 +300,7 @@
                                 <div class="col-md-6 position-relative mt-0">
                                     <label class="form-label">Course</label>
                                     <select class="form-select" id="selectedCourse" name="selectedCourse"
-                                        wire:model="selectedCourse">
+                                        wire:model.live="selectedCourse">
                                         <option selected>Select Course</option>
                                         @foreach ($courses as $course)
                                         <option value="{{ $course->course_id }}">{{ $course->course_name }}
@@ -322,7 +323,7 @@
                                         name</label>
                                     <input type="text" id="father"
                                         class="form-control form-control-sm @error('father') is-invalid @enderror"
-                                        name="father" wire:model="father" />
+                                        name="father" wire:model.live="father" />
                                     @error('father')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -335,7 +336,7 @@
                                         name</label>
                                     <input type="text" id="mother"
                                         class="form-control form-control-sm @error('mother') is-invalid @enderror"
-                                        name="mother" wire:model="mother" />
+                                        name="mother" wire:model.live="mother" />
                                     @error('mother')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -346,11 +347,11 @@
                             {{-- end --}}
                             <div class="row mt-3">
                                 <div class="col-md-6 d-flex justify-content-center gap-4">
-                                    {{-- <button wire:click="resetForm"
+                                    <button wire:click="resetForm"
                                         class="btn btn-warning btn-md fw-bold text-dark mt-2">
                                         <i class="mdi mdi-close"></i>
                                         Reset
-                                    </button> --}}
+                                    </button>
                                     <button type="submit" wire:loading.attr='disabled'
                                         class="btn btn-success btn-md fw-bold text-dark mt-2">
                                         <i class="mdi mdi-content-save"></i>
@@ -383,24 +384,4 @@
             </div>
         </div>
     </section>
-    <style>
-        .campus-label {
-            display: inline-flex;
-            align-items: center;
-            margin-right: 15px;
-        }
-
-        .campus-radio {
-            margin-right: 5px;
-        }
-
-        .mdi-icon {
-            font-size: 18px;
-            vertical-align: middle;
-        }
-
-        .btn .mdi-icon {
-            margin-right: 5px;
-        }
-    </style>
 </div>

@@ -10,7 +10,7 @@ trait Variables
     public $selectedCourse = [];
     public $courses = [];
 
-    public $governmentScholars = [],  $selectedScholarshipType, $scholarshipType, $selectedfundsources2;
+    public $governmentScholars = [],  $selectedScholarshipType, $scholarshipType;
     public $privateScholars = [];
     public $selectedGovernmentScholarship, $selectedPrivateFundSources = [];
     public $selectedPrivateScholarship, $selectedGovernmentFundSources = []; // Update the property name
@@ -43,5 +43,7 @@ trait Variables
     public $selectedScholarshipType1;
     public $selectedfundsources1;
     public $selectedScholarshipType2;
-    public $selectedfund2sources2;
+    public $selectedfundsources2;
+
+
 }

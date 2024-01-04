@@ -22,4 +22,5 @@ class Grantee extends Model
     {
         return $this->belongsTo(ScholarshipName::class);
     }
+   
 }
