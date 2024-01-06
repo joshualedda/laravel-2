@@ -16,9 +16,9 @@ class Fund extends Model
         return $this->belongsTo(Student::class);
     }
     // Define the relationship between Fund and FundSource
-    public function fundSource()
-    {
-        return $this->belongsTo(FundSource::class);
-    }
+    // public function fundSource()
+    // {
+    //     return $this->belongsTo(FundSource::class);
+    // }
 
 }

@@ -19,6 +19,16 @@ class Reports extends Component
     public function mount()
     {
         $this->provinces = Province::where('regCode', 01)->get();
+        $this->fundsources = ScholarshipName::where('scholarship_type', $this->selectedScholarshipType)
+        ->where('status', 0)
+        ->get();
+    }
+
+    public function updatedSelectedScholarshipType($value)
+    {
+        $this->fundsources = ScholarshipName::where('scholarship_type', $value)
+        ->where('status', 0)
+        ->get();
     }
 
     public function updatedSelectedProvince($provinceId)
@@ -44,20 +54,14 @@ class Reports extends Component
     }
     public function fetchSchoolYears()
     {
-        $this->years = SchoolYear::orderBy('school_year', 'desc')->limit(5)->get();
+        $this->years = SchoolYear::orderBy('school_year', 'asc')->limit(5)->get();
     }
-    public function updatedSelectedScholarshipType()
-    {
-        // Reset fund sources when the scholarship type for Scholarship 1 changes
-        $this->selectedfundsources = null;
-    }
+
 
     public function render()
     {
 
         $this->fetchSchoolYears();
-
-        $fundsources = ScholarshipName::where('scholarship_type', $this->selectedScholarshipType)->get();
 
         if (auth()->user()->role === 0 || auth()->user()->role === 1) {
             $this->campuses = Campus::all();
@@ -73,7 +77,7 @@ class Reports extends Component
 
         return view('livewire.reports',[
             'years' => $this->years,
-            'fundsources' => $fundsources,
+            'fundsources' => $this->fundsources,
             'provinces' => $this->provinces,
         ])->extends('layouts.includes.index')
         ->section('content');

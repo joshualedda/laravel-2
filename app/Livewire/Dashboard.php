@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Campus;
+use App\Models\Grantee;
 use App\Models\Student;
 use Livewire\Component;
 use App\Models\SchoolYear;
@@ -20,9 +21,6 @@ class Dashboard extends Component
     public $governmentStudent, $privateStudent;
 
 
-    public $fundSources, $selectedSources;
-    public $years, $selectedYear;
-    public $studentCounts = [];
 
     public function mount()
     {
@@ -49,57 +47,16 @@ class Dashboard extends Component
         ->distinct()
         ->count('student_id');
 
-
-        $this->fetchFilterOptions();
-
     }
+
 
 
     public function render()
     {
-        // dd( $this->government);
-
-        return view('livewire.dashboard')->extends('layouts.includes.index')->section('content');
-    }
-
-    public function fetchFilterOptions()
-    {
-        // Fetch all unique fund sources from the grant column
-        $this->fundSources = ScholarshipName::all();
-
-        // Fetch the top 5 recent years from the school_year column
-        $this->years = SchoolYear::orderBy('school_year', 'desc')
-                            ->groupBy('school_year')
-                            ->take(5)
-                            ->pluck('school_year');
+        return view('livewire.dashboard');
     }
 
 
 
-    public function filterScholarship()
-    {
-        $selectedSources = $this->selectedSources;
-        $selectedYear = $this->selectedYear;
-
-        $studentCountsQuery = StudentGrantee::join('grantees', 'student_grantee.student_id', '=', 'grantees.student_id')
-            ->join('students', 'grantees.student_id', '=', 'students.id')
-            ->leftJoin('campuses', 'students.campus', '=', 'campuses.id')
-            ->where('scholarship_name', $selectedSources)
-            ->where('school_year', $selectedYear)
-            ->select('campuses.campus_name', DB::raw('count(*) as student_count'))
-            ->groupBy('campuses.campus_name');
-
-        if (auth()->user()->role === 0 || auth()->user()->role === 1) {
-            // Admin or manager sees data for all campuses
-            $studentCounts = $studentCountsQuery->get();
-        } else {
-            // Other users see data for their campus only
-            $studentCounts = $studentCountsQuery->where('students.campus', 1)->get(); // Assuming 1 represents their campus
-        }
-
-        $campusNames = Campus::pluck('campus_name')->toArray();
-
-        $this->emit('renderChart', data: $studentCounts, labels: $campusNames);
-    }
 
 }

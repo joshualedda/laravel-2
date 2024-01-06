@@ -24,7 +24,7 @@
                                                 wire:loading.attr="disabled">
                                                 <i class="fas fa-search"></i>
                                             </button>
-                                            <span wire:loading>Filltering...</span>
+                                            <span wire:loading>Filtering...</span>
                                         </div>
                                         <small id="studentIdHelp" class="form-text text-muted">Enter the 8-digit student
                                             ID.</small>

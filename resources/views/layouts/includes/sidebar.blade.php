@@ -162,7 +162,7 @@ use App\Livewire\AddUser;
     <!-- End Reports Nav -->
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="">
             <i class="bi bi-arrow-left-circle"></i>
             <span>Log out</span>
         </a>

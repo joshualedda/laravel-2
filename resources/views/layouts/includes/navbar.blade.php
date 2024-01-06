@@ -8,13 +8,13 @@
     @elseif (Auth::user()->role === 0)
         <style>
             #header {
-                background-color: lightyellow;
+                background-color: rgb(189, 189, 92);
             }
         </style>
     @elseif (Auth::user()->role === 2)
         <style>
             #header {
-                background-color: lightgreen;
+                background-color: rgb(68, 177, 68);
             }
         </style>
     @endif
@@ -34,32 +34,21 @@
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
 
+            @can('admin-access')
+                <li class="nav-item dropdown">
 
-            <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                    </a>
 
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-bell"></i>
-                    <span class="badge bg-primary badge-number">4</span>
-                </a><!-- End Notification Icon -->
 
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                    <li class="dropdown-header">
-                        You have 4 new notifications
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                    </li>
+                    <!-- End Notification Dropdown Items -->
+                    <livewire:notifications-dropdown>
+                    <!-- End Notification Nav -->
+                    
 
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li class="dropdown-footer">
-                        <a href="#">Show all notifications</a>
-                    </li>
-
-                </ul>
-                <!-- End Notification Dropdown Items -->
-            </li>
-            <!-- End Notification Nav -->
-
+                </li>
+            @endcan
 
             <li class="nav-item pe-3">
                 <div class="nav-profile align-items-center p-2">

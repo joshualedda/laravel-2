@@ -15,7 +15,7 @@
                                     <div class="input-group">
                                         <input type="text" id="student_id" class="form-control form-control-sm"
                                             name="student_id" maxlength="10" aria-describedby="studentIdHelp"
-                                            wire:model="student_id">
+                                            wire:model.live="student_id">
 
                                         <button type="button" class="btn btn-primary"
                                             wire:click="studentSearch" wire:loading.attr="disabled">

@@ -1,43 +1,46 @@
-    // if (auth()->user()->role === 0 || auth()->user()->role === 1) {
-    //             $this->campuses = Campus::all();
-    // } else {
-    //         $this->campuses = Campus::where('id', 1)->get();
-    // }
 
 
-    // if ($this->selectedCampus) {
-    //     $campus = Campus::findOrFail($this->selectedCampus);
-    //     $this->courses = $campus->courses;
-    // } else {
-    //     $this->courses = [];
-    // }
 
+        <script>
+            // Get the canvas element
+        const ctx = document.getElementById('myChart').getContext('2d');
 
-    
-            //    if (!empty($this->student->grantees)) {
-        //          $grantees = $this->student->grantees->get(0);  // Retrieve all grantees at once
+        // Chart data
+        const data = {
+        labels: ["NLUC", "MLUC", "SLUC", "OUS"],
+        datasets: [{
+            label: 'Data',
+            data: [1, 30, 40, 10],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+            ],
+            borderWidth: 2,
+        }]
+        };
 
-        //         $this->school_year = $grantees->first()->school_year;
-        //         $this->semester = $grantees->first()->semester;
+        // Chart configuration
+        const options = {
+        scales: {
+            responsive:true,
+            x: {
+            beginAtZero: true
+            }
+        }
+        };
 
-        //         $this->selectedScholarshipType1 = $grantees->first()->scholarship_type;
-        //         $this->selectedfundsources1 = $grantees->first()->scholarship_name;
-
-        //         if ($grantees->count() > 1) {
-        //             $secondGrantee = $grantees->get(1);
-        //             $this->selectedScholarshipType2 = $secondGrantee->scholarship_type;
-        //             $this->selectedfundsources2 = $secondGrantee->scholarship_name;
-        //         } else {
-        //             // Set default values when there's only one or no grantees
-        //             $this->selectedScholarshipType2 = null;
-        //             $this->selectedfundsources2 = null;
-        //         }
-        //     } else {
-        //         // Set default values when there are no grantees
-        //         $this->school_year = []; // or provide a default value
-        //         $this->semester = [];
-        //         $this->selectedScholarshipType1 = [];
-        //         $this->selectedfundsources1 = [];
-        //         $this->selectedScholarshipType2 = [];
-        //         $this->selectedfundsources2 = [];
-        //     }
+        // Create Chart.js bar chart
+        const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+        });
+        </script>

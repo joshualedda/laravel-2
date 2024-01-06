@@ -21,7 +21,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 
-final class studentGrantee extends PowerGridComponent
+final class studentGranteePrivate extends PowerGridComponent
 {
     use WithExport;
     public $scholarship_type_filter;
@@ -38,8 +38,6 @@ final class studentGrantee extends PowerGridComponent
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
-
-            // Bulk::add
         ];
     }
 
@@ -88,7 +86,8 @@ final class studentGrantee extends PowerGridComponent
                     'grantees.school_year',
                     'scholarship_name.name',
                     'grantees.scholarship_type'
-                );
+                )->where('grantees.scholarship_type', '=', 1);
+
         }
 
 

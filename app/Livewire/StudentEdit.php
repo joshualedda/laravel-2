@@ -13,19 +13,20 @@ use App\Models\Province;
 use App\Models\Municipal;
 use App\Traits\Variables;
 use App\Models\SchoolYear;
+use App\Models\Notification;
 use App\Models\ScholarshipName;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class StudentEdit extends Component
 {
     use Variables;
-    public $studentId, $student, $scholarship_name, $scholarship_type, $disabled;
+    public $studentId, $student, $scholarship_name, $scholarship_type;
     public $noStudentRecord = false;
     public $existingStudent;
     public $fundSources1;
     public $fundSources2;
-    public $scholarshipsToCreate;
+    public $scholarshipsCreated;
 
     protected $rules = [
         'student_id' => 'required',
@@ -68,8 +69,15 @@ class StudentEdit extends Component
             $this->selectedProvince = Province::join('students', 'provinces.provCode', '=', 'students.province')
                 ->where('students.id', $this->student->id)
                 ->value('provDesc') ?? "No data";
-            $this->selectedCampus = Campus::find($this->student->campus);
-            $this->selectedCourse = Course::find($this->student->course);
+
+            $this->selectedCampus = Campus::join('students', 'campuses.id', '=', 'students.campus')
+            ->where('students.id', $this->student->id)
+            ->value('campusDesc') ?? "No data";
+
+            $this->selectedCourse = Course::join('students', 'courses.course_id', '=', 'students.course')
+            ->where('students.id', $this->student->id)
+            ->value('course_name') ?? "No data";
+
             $this->level= $this->student->level;
             $this->father= $this->student->father;
             $this->mother= $this->student->mother;
@@ -318,11 +326,17 @@ class StudentEdit extends Component
         }
     }
 
-    // Display appropriate success message
-    $message = $scholarshipsCreatedCount > 1
-        ? 'New grantees have been added successfully!'
-        : ($scholarshipsCreatedCount > 0 ? 'New grantee has been added successfully!' : 'No changes made.');
-    session()->flash('success', $message);
+        Notification::create([
+            'user_id' => auth()->id(),
+            'data' => ('added_by ' . auth()->user()->getRoleText()), // Store role text
+        ]);
+        
+        // Display appropriate success message
+        $message = $scholarshipsCreatedCount > 1
+            ? 'New grantees have been added successfully!'
+            : ($scholarshipsCreatedCount > 0 ? 'New grantee has been added successfully!' : 'No changes made.');
+            
+        session()->flash('success', $message);
 
 
         // Log the action

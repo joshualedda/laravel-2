@@ -1,6 +1,5 @@
-use App\Models\Barangay;
 <div>
-    <section class="p-5">
+    <section class="p-2">
         <div class="row d-flex align-items-center justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
@@ -9,11 +8,12 @@ use App\Models\Barangay;
                         {{ session('success') }}
                     </div>
                     @endif
+                    <div class="card-header">
+                        <h2>Students Reports</h2>
+                    </div>
                     <div class="card-body shadow-lg">
                         <div class="container">
                             <div class="col-md-12 mb-2">
-                                <h2>Students Reports</h2>
-
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label class="form-label">Province</label>
@@ -51,18 +51,31 @@ use App\Models\Barangay;
                                     </div>
                                 </div>
 
-                                <div class="row mt-3">
-                                    <div class="col-md-4">
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
                                         <label class="form-label">Campus</label>
                                         <select class="form-select form-select-sm" name="selectedCampus"
                                             id="selectedCampus" wire:model.live="selectedCampus">
-                                            <option selected>Select Campus</option>
+                                            <option selected>Select Campus below...</option>
                                             @foreach ($campuses as $campus )
                                             <option value="{{ $campus->id }}">{{ $campus->campusDesc }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Course</label>
+                                        <select class="form-select form-select-sm" name="selectedCourse"
+                                            id="selectedCourse" wire:model.live="selectedCourse">
+                                            <option selected>Select Course below</option>
+                                            @foreach ($courses as $course )
+                                            <option value="{{ $course->course_id }}">{{ $course->course_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-3">
                                         <label class="form-label">Semester</label>
                                         <select class="form-select form-select-sm" name="semester" id="semester"
                                             name="semester" wire:model.live="semester">
@@ -72,9 +85,9 @@ use App\Models\Barangay;
                                         </select>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label class="form-label">School year</label>
-                                        <select class="form-select form-select-sm" id="year" name="year"
+                                        <select class="form-select form-select-sm" id="selectedYear" name="selectedYear"
                                             wire:model.live="selectedYear">
                                             <option selected>School year</option>
                                             @foreach($years as $year)
@@ -85,28 +98,27 @@ use App\Models\Barangay;
                                         @error('selectedYear')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3 justify-content-center">
-                                <div class="col-md-4">
-                                    <label class="form-label">Scholarship Type</label>
-                                    <select class="form-select form-select-md" wire:model.live="selectedScholarshipType">
-                                        <option selected>School scholarship type</option>
-                                        <option value="0">Government</option>
-                                        <option value="1">Private</option>
-                                    </select>
-                                </div>
 
-                                <div class="col-md-4">
-                                    <label class="form-label">Funds Source</label>
-                                    <select class="form-select form-select-md" wire:model.live="selectedfunsources">
-                                        <option selected>Select a fund source</option>
-                                        @foreach($fundsources as $fundsource)
-                                        <option value="{{ $fundsource->id }}">{{ $fundsource->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Scholarship Type</label>
+                                        <select class="form-select form-select-sm" wire:model.live="selectedScholarshipType">
+                                            <option selected>School scholarship type</option>
+                                            <option value="0">Government</option>
+                                            <option value="1">Private</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-label">Funds Source</label>
+                                        <select class="form-select form-select-sm" wire:model.live="selectedfunsources">
+                                            <option selected>Select a fund source</option>
+                                            @foreach ($fundsources as $source )
+                                            <option value="{{ $source->id }}">{{ $source->name }}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12 text-start mt-4">

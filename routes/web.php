@@ -18,6 +18,7 @@ use App\Livewire\UserAccount;
 use App\Livewire\ViewGrantee;
 use App\Livewire\CampusCourse;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -40,13 +41,18 @@ Route::middleware(['guest'])->group(function () {
     });
     Route::get('/login', [ LoginController::class, 'login'])->name('auth.login');
     Route::post('/login', [ LoginController::class, 'loginAction'])->name('login.action');
+    // Route::get('/logout', [ LoginController::class, 'logout'])->name('logout');
+
 });
 
 
 
 
 // dashboard
-Route::get('/dashboard', Dashboard::class)->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// barChart 
+Route::post('/filter', [DashboardController::class, 'filterStudents']);
+
 
 // Student
 Route::get('/student', StudentAdd::class)->name('student-add');
@@ -60,7 +66,12 @@ Route::get('/studentGrantee/{rowId}', StudentEdit::class)->name('student-edit');
 // scholarship
 // viewGrantee
 Route::get('/viewGrantee', ViewGrantee::class)->name('view-grantee');
+Route::get('/viewGrantee/government', ViewGrantee::class)->name('viewGrantee.government');
+Route::get('/viewGrantee/private', ViewGrantee::class)->name('viewGrantee.private');
 // edit
+
+
+// viewGrantee
 Route::get('/editGrantee/{editId}', EditGrantee::class)->name('edit-grantee');
 
 

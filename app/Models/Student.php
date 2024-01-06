@@ -34,7 +34,7 @@ class Student extends Model
 
     public function campus()
     {
-        return $this->belongsTo(Campus::class, 'campus');
+        return $this->belongsTo(Campus::class);
     }
 
     public function course()
@@ -44,7 +44,7 @@ class Student extends Model
 
     public function barangay()
     {
-        return $this->belongsTo(Barangay::class, 'barangay', 'id');
+        return $this->belongsTo(Barangay::class, 'barangay', 'brgyCode');
     }
 
     public function municipal()
@@ -89,7 +89,7 @@ class Student extends Model
     }
     public function getTextAttribute()
     {
-        $value = $this->attributes['scholarship_type'];
+        $value = $this->attributes['scholarship_type'] ??  null;
         switch ($value) {
             case 0:
                 return 'Government';
