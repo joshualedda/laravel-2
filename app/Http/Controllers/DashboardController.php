@@ -20,28 +20,7 @@ class DashboardController extends Controller
         $fundSources = ScholarshipName::all();
         $years = SchoolYear::orderBy('school_year', 'desc')->distinct()->limit(5)->get();
 
-        // Store selected values from the request (if available)
-        $this->selectedSources = $request->input('selectedSources', null);
-        $this->selectedYear = $request->input('selectedYear', null);
-
-        // Retrieve student counts based on selected filters (or all if none selected)
-        $studentCount = $this->getFilteredStudentCount();
-
-        // Get all campus names
-        $allCampuses = DB::table('campuses')->pluck('campus_name');
-
-        // Combine student counts with all campuses, filling in 0 values
-        $studentCountByCampus = $allCampuses->map(function ($campusName) use ($studentCount) {
-            $matchingCount = $studentCount->firstWhere('campus_name', $campusName);
-
-            return [
-                'campus_name' => $campusName,
-                'student_count' => $matchingCount ? $matchingCount->student_count : 0
-            ];
-        });
-        
-
-        return view('dashboard', compact('fundSources', 'years', 'studentCountByCampus'));
+        return view('dashboard', compact('fundSources', 'years'));
     }
 
 
@@ -49,26 +28,25 @@ class DashboardController extends Controller
 
     public function filterData(Request $request)
     {
-        $selectedSource = $request->input('selectedSource');
-        $selectedYear = $request->input('selectedYear');
-
-        // Store selected values for subsequent filter calls
-        $this->selectedSources = $selectedSource;
-        $this->selectedYear = $selectedYear;
-
-        // Retrieve filtered student counts
-        $studentCount = $this->getFilteredStudentCount();
-
-        // Combine with campus names, filling in 0 values
-        $allCampuses = DB::table('campuses')->pluck('campus_name');
-        $studentCountByCampus = $allCampuses->map(function ($campusName) use ($studentCount) {
-            $matchingCount = $studentCount->firstWhere('campus_name', $campusName);
-
-            return [
-                'campus_name' => $campusName,
-                'student_count' => $matchingCount ? $matchingCount->student_count : 0
-            ];
-        });
+          // Store selected values from the request (if available)
+          $this->selectedSources = $request->input('selectedSources', null);
+          $this->selectedYear = $request->input('selectedYear', null);
+  
+          // Retrieve student counts based on selected filters (or all if none selected)
+          $studentCount = $this->getFilteredStudentCount();
+  
+          // Get all campus names
+          $allCampuses = DB::table('campuses')->pluck('campus_name');
+  
+          // Combine student counts with all campuses, filling in 0 values
+          $studentCountByCampus = $allCampuses->map(function ($campusName) use ($studentCount) {
+              $matchingCount = $studentCount->firstWhere('campus_name', $campusName);
+  
+              return [
+                  'campus_name' => $campusName,
+                  'student_count' => $matchingCount ? $matchingCount->student_count : 0
+              ];
+          });
 
         // Return filtered data as JSON
         return response()->json($studentCountByCampus);

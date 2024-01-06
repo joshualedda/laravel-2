@@ -108,71 +108,58 @@ class StudentInfo extends Component
 
     // seach
 
-    // public function studentSearch()
-    // {
-    //     $this->existingStudent = null; // Reset student data initially
-    //     $this->noStudentRecord = false; // Reset error flag
+    public function studentSearch()
+    {
+        $this->existingStudent = null; // Reset student data initially
+        $this->noStudentRecord = false; // Reset error flag
 
-    //     $studentId = $this->student_id;
+        $studentId = $this->student_id;
         
-    //     // Perform the student search logic based on the role and campus restrictions:
-    //     if (auth()->user()->role === 0 || auth()->user()->role === 1) {
-    //         $this->existingStudent = Student::where('student_id', $studentId)
-    //         ->first();
-    //         } else {
-    //         $this->existingStudent = Student::where('student_id', $studentId)
-    //         ->where('campus', 1)
-    //         ->first();
+        // Perform the student search logic based on the role and campus restrictions:
+        if (auth()->user()->role === 0 || auth()->user()->role === 1) {
+            $this->existingStudent = Student::where('student_id', $studentId)
+            ->first();
+            } else {
+            $this->existingStudent = Student::where('student_id', $studentId)
+            ->where('campus', 1)
+            ->first();
 
-    //         // Add validation for users with roles other than 0 or 1
-    //         if ($this->existingStudent && $this->existingStudent->campus !== 1) {
-    //             // Handle the error or add your custom logic
-    //             $error = 'Access Denied!';
-    //             session()->flash('error', $error);
-    //         }
-    //     }
-    //         dd($this->existingStudent);
+            // Add validation for users with roles other than 0 or 1
+            if ($this->existingStudent && $this->existingStudent->campus !== 1) {
+                // Handle the error or add your custom logic
+                $error = 'Access Denied!';
+                session()->flash('error', $error);
+            }
+        }
+            dd($this->existingStudent);
 
-    //     if (!$this->existingStudent) {
-    //         $this->noStudentRecord = true;
-    //     } else {
-    //         // If a student is found, display sample data:
-    //         $this->lastname = $this->existingStudent->lastname;
-    //         $this->firstname = $this->existingStudent->firstname;
-    //         $this->initial = $this->existingStudent->initial;
-    //         $this->sex = $this->existingStudent->sex;
-    //         $this->status = $this->existingStudent->status;
-    //         $this->email = $this->existingStudent->email;
-    //         $this->contact = $this->existingStudent->contact;
+        if (!$this->existingStudent) {
+            $this->noStudentRecord = true;
+        } else {
+            // If a student is found, display sample data:
+            $this->lastname = $this->existingStudent->lastname;
+            $this->firstname = $this->existingStudent->firstname;
+            $this->initial = $this->existingStudent->initial;
+            $this->sex = $this->existingStudent->sex;
+            $this->status = $this->existingStudent->status;
+            $this->email = $this->existingStudent->email;
+            $this->contact = $this->existingStudent->contact;
 
-    //         $this->selectedCampus = Campus::join('students', 'campuses.id', '=', 'students.campus')
-    //             ->where('students.id', $this->existingStudent->id)
-    //             ->value('campusDesc') ?? "No data";
-    //         $this->selectedCourse = Course::join('students', 'courses.course_id', '=', 'students.course')
-    //             ->where('students.id', $this->existingStudent->id)
-    //             ->value('course_name') ?? "No data";
+            $this->selectedCampus = $this->existingStudent->campus;
+            $this->selectedCourse  = $this->existingStudent->course;
+            $this->selectedBarangay = $this->existingStudent->barangay;
+            $this->selectedMunicipality = $this->existingStudent->municipal;
+            $this->selectedProvince = $this->existingStudent->province;
 
-    //         $this->studentType = $this->existingStudent->studentType;
-    //         $this->nameSchool = $this->existingStudent->nameSchool ?? "No Data";
-    //         $this->lastYear = $this->existingStudent->lastYear ?? "No Data";
+            $this->studentType = $this->existingStudent->studentType;
+            $this->nameSchool = $this->existingStudent->nameSchool ?? "No Data";
+            $this->lastYear = $this->existingStudent->lastYear ?? "No Data";
 
-    //         $this->selectedBarangay = Barangay::join('students', 'barangays.brgyCode', '=', 'students.barangay')
-    //             ->where('students.id', $this->existingStudent->id)
-    //             ->value('brgyDesc') ?? "No data";
-
-    //         $this->selectedMunicipality = Municipal::join('students', 'municipals.citymunCode', '=', 'students.municipal')
-    //             ->where('students.id', $this->existingStudent->id)
-    //             ->value('citymunDesc') ?? "No data";
-
-    //         $this->selectedProvince = Province::join('students', 'provinces.provCode', '=', 'students.province')
-    //             ->where('students.id', $this->existingStudent->id)
-    //             ->value('provDesc') ?? "No data";
-
-    //         $this->level = $this->existingStudent->level;
-    //         $this->father = $this->existingStudent->father;
-    //         $this->mother = $this->existingStudent->mother;
-    //     }
-    // }
+            $this->level = $this->existingStudent->level;
+            $this->father = $this->existingStudent->father;
+            $this->mother = $this->existingStudent->mother;
+        }
+    }
 
 
 

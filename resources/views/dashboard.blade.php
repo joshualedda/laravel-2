@@ -54,15 +54,12 @@
             // Get the canvas element
             const ctx = document.getElementById('myChart').getContext('2d');
 
-            // Access student count data from PHP
-            const studentCountData = @json(studentCountByCampus);
-
             // Chart data
             const data = {
-                labels: studentCountData.map(campus => campus.campus_name),
+                labels: ['NLUC','MLUC','SLUC', 'OUS'],
                 datasets: [{
                     label: 'Grantees',
-                    data: studentCountData.map(campus => campus.student_count),
+                    data: ['45','42','32', '57'],
                     backgroundColor: [
                         '#D1F7BA', // Green
                         '#F7D3D3', // Red
@@ -97,9 +94,6 @@
             });
         </script>
     </div>
-
-
-
 </section>
 
 @endsection

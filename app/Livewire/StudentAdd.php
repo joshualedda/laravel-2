@@ -8,6 +8,8 @@ class StudentAdd extends Component
 {
     public function render()
     {
-        return view('livewire.student-add')->extends('layouts.includes.index')->section('content');
+        return view('livewire.student-add')
+        ->extends('layouts.includes.index')
+        ->section('content');
     }
 }
