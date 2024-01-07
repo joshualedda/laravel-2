@@ -50,8 +50,8 @@ Route::middleware(['guest'])->group(function () {
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-// barChart 
-Route::post('/filter', [DashboardController::class, 'filterStudents']);
+// barChart
+Route::post('/filter', [DashboardController::class, 'filterData']);
 
 
 // Student

@@ -9,9 +9,7 @@
                     <div class="card-body">
                         <form wire:submit.prevent="saveStudent">
                             @csrf
-                            {{-- @method('PUT') --}}
                             <div class="row">
-
                                 <div class="col-md-3 mb-3">
                                     <div class="form-group">
                                         <label class="form-label" for="student_id">Student ID</label>
@@ -24,7 +22,6 @@
                                                 wire:loading.attr="disabled">
                                                 <i class="fas fa-search"></i>
                                             </button>
-                                            <span wire:loading>Filtering...</span>
                                         </div>
                                         <small id="studentIdHelp" class="form-text text-muted">Enter the 8-digit student
                                             ID.</small>
@@ -64,18 +61,14 @@
                                 <label for="campus-selection" class="fw-bold fs-5 mb-2">CAMPUS:</label>
                                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
                                     <div class="col">
-                                        @if($campuses)
                                         @foreach ($campuses as $campus)
                                         <label class="form-check-label" for="selectedCampus">
                                             <input class="form-check-input campus-radio" type="radio"
                                                 wire:model.live="selectedCampus" value="{{ $campus->id }}"
-                                                id="campus_{{ $campus->id }}" name="selectedCampus" @if($selectedCampus) disabled @endif>
+                                                id="selectedCampus" name="selectedCampus">
                                             {{ $campus->campus_name }}
                                         </label>
                                         @endforeach
-                                        @else
-                                        <p>No campus found</p>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +132,7 @@
                                 </div>
 
                                 <div class="col-md-4 position-relative mt-0">
-                                    <label class="form-label" for="initial" name="initial">Middle Initial</label>
+                                    <label class="form-label" for="initial">Middle Initial</label>
                                     <input type="text" id="initial"
                                         class="form-control form-control-sm @error('initial') is-invalid @enderror"
                                         wire:model.live="initial" name="initial" />
@@ -155,7 +148,7 @@
                             <div class="row">
                                 <div class="col-md-4 position-relative mt-0">
                                     <label class="form-label">Province</label>
-                                    <select class="form-select" wire:model.live="selectedProvince"
+                                    <select class="form-select" wire:model="selectedProvince"
                                         name="selectedProvince">
                                         <option value="" selected>Select Province</option>
                                         @foreach ($provinces as $province)
@@ -210,12 +203,12 @@
                                         <label for="sex" class="fw-bold mx-5">Sex:</label>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input @error('sex') is-invalid @enderror mx-2"
-                                                type="radio" id="male" value="Male" wire:model.live="sex" name="sex">
+                                                type="radio" id="sex" value="Male" wire:model.live="sex" name="sex">
                                             <label class="form-check-label m-0" for="sex">Male</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input @error('sex') is-invalid @enderror"
-                                                type="radio" id="female" value="Female" wire:model.live="sex"
+                                                type="radio" id="sex" value="Female" wire:model.live="sex"
                                                 name="sex">
                                             <label class="form-check-label m-0" for="sex">Female</label>
                                         </div>

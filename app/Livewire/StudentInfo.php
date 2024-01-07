@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\Campus;
-use App\Models\Course;
 use App\Models\Student;
 use Livewire\Component;
 use App\Models\AuditLog;
@@ -12,7 +11,6 @@ use App\Models\Province;
 use App\Models\Municipal;
 use App\Traits\Variables;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 
 class StudentInfo extends Component
 {
@@ -125,17 +123,18 @@ class StudentInfo extends Component
             ->first();
 
             // Add validation for users with roles other than 0 or 1
-            if ($this->existingStudent && $this->existingStudent->campus !== 1) {
+            if ($this->existingStudent && $this->existingStudent->campus !== 1 ) {
                 // Handle the error or add your custom logic
                 $error = 'Access Denied!';
                 session()->flash('error', $error);
             }
         }
-            dd($this->existingStudent);
+            // dd($this->existingStudent);
 
         if (!$this->existingStudent) {
             $this->noStudentRecord = true;
         } else {
+            // dd($this->existingStudent);
             // If a student is found, display sample data:
             $this->lastname = $this->existingStudent->lastname;
             $this->firstname = $this->existingStudent->firstname;
@@ -158,6 +157,7 @@ class StudentInfo extends Component
             $this->level = $this->existingStudent->level;
             $this->father = $this->existingStudent->father;
             $this->mother = $this->existingStudent->mother;
+            
         }
     }
 
@@ -199,7 +199,6 @@ class StudentInfo extends Component
             } else {
                 $this->campuses = Campus::where('id', 1)->get();
             }
-
 
             if ($this->selectedCampus) {
                 $campus = Campus::findOrFail($this->selectedCampus);

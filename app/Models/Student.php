@@ -34,27 +34,27 @@ class Student extends Model
 
     public function campus()
     {
-        return $this->belongsTo(Campus::class);
+        return $this->belongsTo(Campus::class, 'id');
     }
 
     public function course()
     {
-        return $this->belongsTo(Course::class);
+        return $this->hasMany(Course::class, 'course_id');
     }
 
     public function barangay()
     {
-        return $this->belongsTo(Barangay::class, 'barangay', 'brgyCode');
+        return $this->hasMany(Barangay::class, 'barangay', 'brgyCode');
     }
 
     public function municipal()
     {
-        return $this->belongsTo(Municipal::class, 'municipal', 'id');
+        return $this->hasMany(Municipal::class, 'municipal', 'citymunCode');
     }
 
     public function province()
     {
-        return $this->belongsTo(Province::class, 'province', 'id');
+        return $this->hasMany(Province::class, 'province', 'provCode');
     }
 
     public function scholarshipName()

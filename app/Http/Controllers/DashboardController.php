@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public $fundSources, $selectedSources;
     public $years, $selectedYear;
 
-    public function index(Request $request)
+    public function index()
     {
         $fundSources = ScholarshipName::all();
         $years = SchoolYear::orderBy('school_year', 'desc')->distinct()->limit(5)->get();
@@ -31,17 +31,17 @@ class DashboardController extends Controller
           // Store selected values from the request (if available)
           $this->selectedSources = $request->input('selectedSources', null);
           $this->selectedYear = $request->input('selectedYear', null);
-  
+
           // Retrieve student counts based on selected filters (or all if none selected)
           $studentCount = $this->getFilteredStudentCount();
-  
+
           // Get all campus names
           $allCampuses = DB::table('campuses')->pluck('campus_name');
-  
+
           // Combine student counts with all campuses, filling in 0 values
           $studentCountByCampus = $allCampuses->map(function ($campusName) use ($studentCount) {
               $matchingCount = $studentCount->firstWhere('campus_name', $campusName);
-  
+
               return [
                   'campus_name' => $campusName,
                   'student_count' => $matchingCount ? $matchingCount->student_count : 0

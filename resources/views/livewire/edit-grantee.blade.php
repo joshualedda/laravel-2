@@ -65,7 +65,6 @@
                                 <label for="campus-selection" class="fw-bold fs-5 mb-2">CAMPUS:</label>
                                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
                                     <div class="col">
-                                        {{-- @if($campuses) --}}
                                         @foreach ($campuses as $campus)
                                         <label class="form-check-label" for="selectedCampus">
                                             <input class="form-check-input campus-radio" type="radio"
@@ -74,9 +73,6 @@
                                             {{ $campus->campus_name }}
                                         </label>
                                         @endforeach
-                                        {{-- @else
-                                        <p>No campus found</p>
-                                        @endif --}}
                                     </div>
                                 </div>
                             </div>
