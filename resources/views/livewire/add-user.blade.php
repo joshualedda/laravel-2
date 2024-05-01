@@ -1,6 +1,6 @@
 <div>
     <section class="vh-100 mt-2 px-3 p-2">
-        <div class="container py-2 h-75 shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="container py-2 h-75 shadow-sm p-3 mb-5 bg-body rounded">
             {{-- message here --}}
             @if (session('success'))
             <div class="alert alert-success">
