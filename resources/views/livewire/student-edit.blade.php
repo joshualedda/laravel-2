@@ -56,25 +56,25 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-3 col-md-8">
+                            <div class="col-3 col-md-6">
                                 <label class="form-label" for="campus">CAMPUS</label>
                                 <input class="form-control form-control-sm" type="text"
                                     wire:model.live="selectedCampus"
                                     @if($selectedCampus) disabled @endif>
 
                             </div>
-                            <div class="col-3 col-md-4">
+                            <div class="col-3 col-md-6">
                                 <label class="form-label" for="studentType">STUDENT TYPE</label>
                                 <input class="form-control form-control-sm" type="text" wire:model.live="studentType"
                                     @if($studentType) disabled @endif name="studentType">
                             </div>
-                            <div class="col-3 col-md-6">
+                            <div class="col-3 col-md-6 my-2">
                                 <label for="nameSchool"><span class="text-danger">*</span> If new, indicate name of
                                     school last attended:</label>
                                 <input type="text" class="form-control form-control-sm" name="nameSchool"
                                     id="nameSchool" wire:model.defer="nameSchool" @if($nameSchool) disabled @endif>
                             </div>
-                            <div class="col-3 col-md-6">
+                            <div class="col-3 col-md-6 my-2">
                                 <label for="lastYear"><span class="text-danger">*</span> School year last
                                     attended:</label>
                                 <input type="text" class="form-control form-control-sm" name="lastYear" id="lastYear"
@@ -82,7 +82,7 @@
                             </div>
                         </div>
 
-
+<hr>
 
                         <div class="row">
                             <p class="fw-bold fs-5">I. STUDENT INFORMATION</p>
@@ -170,6 +170,7 @@
                                     @if($selectedCourse) disabled @endif />
                             </div>
                         </div>
+                        <hr>
 
                         {{-- family --}}
                         <div class="row mb-4">
@@ -190,6 +191,7 @@
                             </div>
                         </div>
 
+                        <hr>
 
                         <form wire:submit.prevent="addScholarship">
                                 <div class="row">

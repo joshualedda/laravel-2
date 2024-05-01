@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header fw-bold" >
+                    <div class="card-header fw-bold fs-5" >
                         Add Student
                     </div>
                     <div class="card-body">
@@ -64,7 +64,7 @@
                                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
                                     <div class="col">
                                         @foreach ($campuses as $campus)
-                                        <label class="form-check-label" for="selectedCampus">
+                                        <label class="form-check-label mx-3" for="selectedCampus">
                                             <input class="form-check-input campus-radio" type="radio"
                                                 wire:model.live="selectedCampus" value="{{ $campus->id }}"
                                                 id="selectedCampus" name="selectedCampus">
@@ -81,7 +81,7 @@
                             <div class="row mt-2 mb-2 row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
                                 <div class="col">
                                     @foreach (['New', 'Continuing', 'Returning Student'] as $type)
-                                    <label class="form-check-label">
+                                    <label class="form-check-label mx-3">
                                         <input class="form-check-input @error('studentType') is-invalid @enderror"
                                             type="radio" name="studentType" id="check{{ $type }}" value="{{ $type }}"
                                             wire:model.live="studentType"
@@ -98,7 +98,7 @@
                             </div>
 
 
-                            <div class="col-md-4 mx-3 my-1" id="newInput"
+                            <div class="col-md-4  my-1" id="newInput"
                                 style="display: @if ($showNewInput) block @else none @endif;">
                                 <label for="nameSchool"><span class="text-danger">*</span> If new, indicate name of
                                     school last attended:</label>
@@ -109,6 +109,7 @@
                                 <input type="text" class="form-control form-control-sm" name="lastYear" id="lastYear"
                                     wire:model.live="lastYear">
                             </div>
+                            <hr>
 
 
                             <div class="row">
@@ -203,10 +204,13 @@
                             </div>
 
                             {{-- sex here --}}
-                            <div class="row g-3">
-                                <div class="col-md-3">
+                            <div class="row my-4">
+
+
+
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="sex" class="fw-bold mx-5">Sex:</label>
+                                        <label for="sex" class=" mx-5">Sex:</label>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input @error('sex') is-invalid @enderror mx-2"
                                                 type="radio" id="sex" value="Male" wire:model.live="sex" name="sex">
@@ -226,9 +230,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="status" class="fw-bold mx-5">Civil Status:</label>
+                                        <label for="status" class=" mx-5">Civil Status:</label>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input @error('status') is-invalid @enderror"
                                                 type="radio" id="single" value="Single" wire:model.live="status"
@@ -249,7 +253,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3 position-relative mt-3">
+
+
+                                <div class="col-md-6 position-relative mt-3">
                                     <label class="form-label" for="contact">Contact
                                         Number</label>
                                     <input type="text" id="contact"
@@ -262,7 +268,7 @@
                                     @enderror
                                 </div>
                                 <!-- Email -->
-                                <div class="col-md-3 position-relative mt-3">
+                                <div class="col-md-6 position-relative mt-3">
                                     <label class="form-label" for="email">Email Address</label>
                                     <input type="email" id="email"
                                         class="form-control form-control-sm @error('email') is-invalid @enderror"
@@ -277,7 +283,7 @@
                             {{-- sex end --}}
 
                             <div class="row mt-2 mb-2">
-                                <div class="col-md-3 position-relative mt-0">
+                                <div class="col-md-6 position-relative mt-0">
                                     <label class="form-label">Year level</label>
                                     <select name="level" id="level"
                                         class="@error('level') is-invalid @enderror form-select form-select-sm text-center"
@@ -312,6 +318,7 @@
                                     @enderror
                                 </div>
                             </div>
+                            <hr>
                             {{-- family --}}
                             <div class="row mb-4">
                                 <p class="fw-bold fs-5">II. FAMILY INFORMATION</p>

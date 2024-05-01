@@ -3,11 +3,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
+                    <div class="card-header">Students Data</div>
                     <div class="card-body">
-
-                        <div class="d-flex justify-content-between mx-2">
-                            <h5 class="card-title">Students Data</h5>
-
+                        <div class="d-flex justify-content-end my-2">
                             <div>
                                 <button type="button" class="btn btn-sm btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     Import
@@ -17,8 +15,6 @@
                                 </a>
                             </div>
                         </div>
-
-
 
                     <div >
                         <livewire:student-table />
