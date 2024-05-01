@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-body shadow-lg">
                         <div class="container">
-                            <form wire:submit='reportGenerate'>
+                            <form >
                                 @csrf
                                 <div class="col-md-12 mb-2">
                                     <div class="row">
@@ -91,7 +91,7 @@
                                         <div class="col-md-3">
                                             <label class="form-label">School year</label>
                                             <select class="form-select form-select-sm" id="selectedYear"
-                                                name="selectedYear" wire:model.live="selectedYear">
+                                                name="selectedYear" wire:model.live="selectedYear" required>
                                                 <option selected>School year</option>
                                                 @foreach($years as $year)
                                                 <option value="{{ $year->school_year }}">{{ $year->school_year }}
@@ -127,7 +127,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-start mt-4">
-                                    <button type="button" class="btn btn-md btn-primary" wire:click="generateReport"
+                                    <button type="submit" class="btn btn-md btn-primary" wire:click="export"
                                         wire:loading.attr="disabled">
                                         Generate Report
                                     </button>

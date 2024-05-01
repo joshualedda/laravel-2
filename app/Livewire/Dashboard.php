@@ -10,6 +10,7 @@ use App\Models\SchoolYear;
 use App\Models\StudentGrantee;
 use App\Models\ScholarshipName;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class Dashboard extends Component
@@ -35,17 +36,33 @@ class Dashboard extends Component
 
         // 2nd card
         // Count scholars in government
+    if(Auth::user()->role === 1 || Auth::user()->role === 0)
+    {
         $this->governmentStudent = DB::table('grantees')
         ->where('scholarship_type', 0)
-        ->distinct()
         ->count('student_id');
 
 
         // Count scholars in private
         $this->privateStudent = DB::table('grantees')
         ->where('scholarship_type', 1)
-        ->distinct()
         ->count('student_id');
+    } else{
+    // Count scholars in government with campus 1
+        $this->governmentStudent = Grantee::where('scholarship_type', 0)
+        ->whereHas('student', function ($query) {
+            $query->where('campus', 1);
+        })
+        ->count();
+
+         $this->privateStudent= Grantee::where('scholarship_type', 1)
+        ->whereHas('student', function ($query) {
+            $query->where('campus', 1);
+        })
+        ->count();
+
+
+    }
 
     }
 

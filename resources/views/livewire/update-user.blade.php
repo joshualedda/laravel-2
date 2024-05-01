@@ -24,22 +24,22 @@
                                     <div class="col-md-3">
                                         <label for="name" class="form-label">Name</label>
                                         <input type="text" class="form-control form-control-sm" id="name" name="name"
-                                            wire:model.live="name">
+                                            wire:model="name">
                                     </div>
                                     <div class="col-md-3">
                                         <label for="username" class="form-label">Username</label>
                                         <input type="text" class="form-control form-control-sm" id="username"
-                                            name="username" wire:model.live="username">
+                                            name="username" wire:model="username">
                                     </div>
                                     <div class="col-md-3">
                                         <label for="email" class="form-label">Email Address</label>
                                         <input type="text" class="form-control form-control-sm" id="email" name="email"
-                                            wire:model.live="email">
+                                            wire:model="email">
                                     </div>
                                     <div class="col-md-3">
                                         <label for="role" class="form-label">Role</label>
                                         <select class="form-select form-select-sm" id="role" name="role"
-                                            wire:model.live="role">
+                                            wire:model="role">
                                             <option value="1">Admin</option>
                                             <option value="0">Staff</option>
                                             <option value="2">Campus In-charge NLUC</option>
@@ -52,7 +52,7 @@
                                         <label for="password">Password</label>
                                         <div class="input-group">
                                             <input type="password" class="form-control form-control-sm" id="password"
-                                                name="password" wire:model.live="password">
+                                                name="password" wire:model="password">
                                             <span class="input-group-text"
                                                 onclick="togglePasswordVisibility('password')">
                                                 <i class="bi bi-eye-slash"></i>
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">Update</button>
                             <a href="{{ url('/userAccount') }}" type="submit" class="btn btn-danger">Cancel</a>
                         </form>
                     </div>

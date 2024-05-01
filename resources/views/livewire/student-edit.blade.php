@@ -57,14 +57,14 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-3 col-md-6">
+                            <div class="col-3 col-md-8">
                                 <label class="form-label" for="campus">CAMPUS</label>
                                 <input class="form-control form-control-sm" type="text"
                                     wire:model.live="selectedCampus"
                                     @if($selectedCampus) disabled @endif>
 
                             </div>
-                            <div class="col-3 col-md-6">
+                            <div class="col-3 col-md-4">
                                 <label class="form-label" for="studentType">STUDENT TYPE</label>
                                 <input class="form-control form-control-sm" type="text" wire:model.live="studentType"
                                     @if($studentType) disabled @endif name="studentType">
@@ -193,6 +193,7 @@
 
                         <div class="row">
                             <form wire:submit.prevent="addScholarship">
+                                @csrf
                                 <h4>III. Scholarships</h4>
                                 <div class="row">
                                     <div class="col-md-4">

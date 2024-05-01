@@ -7,19 +7,16 @@
 
         .link:hover {
             color: blue;
-            text-decoration: underline;
-        }
-
-        .card-body {
-            max-width: 25rem;
-            height: 15rem;
+            text-decoration: ;
         }
     </style>
+
+
 <div class="row">
 
         <!-- Government Scholarships -->
         <div class="col-md-3 stretch-card grid-margin">
-            <div class="card bg-gradient-light card-img-holder text-dark shadow-lg">
+            <div class="card bg-gradient-light card-img-holder text-dark shadow-sm">
                 <div class="card-body">
                     <h2 class="font-weight-normal mb-3">
                         <i class="fas fa-graduation-cap fa-2x"></i>
@@ -37,7 +34,7 @@
 
         <!-- Private Scholarships -->
         <div class="col-md-3 stretch-card grid-margin">
-            <div class="card bg-gradient-light card-img-holder text-dark shadow-lg">
+            <div class="card bg-gradient-light card-img-holder text-dark shadow-sm">
                 <div class="card-body">
                     <h2 class="font-weight-normal mb-3">
                         <i class="fas fa-university fa-2x"></i>
@@ -57,7 +54,7 @@
 
         <!-- Active Scholarship -->
         <div class="col-md-3 stretch-card grid-margin">
-            <div class="card bg-gradient-light card-img-holder text-dark shadow-lg">
+            <div class="card bg-gradient-light card-img-holder text-dark shadow-sm">
                 <div class="card-body">
                     <h2 class="font-weight-normal mb-3">
                         <i class="fas fa-check-circle fa-2x"></i>
@@ -78,11 +75,11 @@
 
         <!-- Inactive Scholarship -->
         <div class="col-md-3 stretch-card grid-margin">
-            <div class="card bg-gradient-light card-img-holder text-dark shadow-lg">
+            <div class="card bg-gradient-light card-img-holder text-dark shadow-sm">
                 <!-- Use an appropriate icon for inactive scholarships -->
                 <div class="card-body">
                     <h2 class="font-weight-normal mb-3">
-                        <i class="fas fa-times-circle fa-2x"></i>
+                        <i class="fas fa-check-circle fa-2x"></i>
                     </h2>
 
                     <h4 class="mb-3 mt-4 d-flex align-items-start">
@@ -101,7 +98,7 @@
 <div class="row">
         <!-- Government Grantees -->
         <div class="col-md-3 stretch-card grid-margin">
-            <div class="card bg-gradient-light card-img-holder text-dark shadow-lg">
+            <div class="card bg-gradient-light card-img-holder text-dark shadow-sm">
                 <div class="card-body">
                     <h2 class="font-weight-normal mb-3">
                         <i class="fas fa-user-graduate fa-2x"></i>
@@ -119,7 +116,7 @@
 
         <!-- Private Grantees -->
         <div class="col-md-3 stretch-card grid-margin">
-            <div class="card bg-gradient-light card-img-holder text-dark shadow-lg">
+            <div class="card bg-gradient-light card-img-holder text-dark shadow-sm">
                 <div class="card-body">
                     <h2 class="font-weight-normal mb-3">
                         <i class="fas fa-users fa-2x"></i>
@@ -137,3 +134,4 @@
 
 
 </div>
+

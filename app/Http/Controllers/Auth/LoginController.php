@@ -32,6 +32,7 @@ class LoginController extends Controller
                 'action' => 'Login',
                 'data' => json_encode('Login by ' . $user->name),
             ]);
+            // dd($user->name);
 
         // $user = Auth::user();
         return redirect()->route('dashboard');
@@ -40,23 +41,22 @@ class LoginController extends Controller
     return redirect()->back()->withErrors(['login' => 'Invalid credentials'])->withInput();
     }
 
-    public function logout(Request $request)
-{
 
-    $user = Auth::user(); // get aunthenticated
-    // record
-    AuditLog::create([
-        'user_id' => $user->id,
-        'action' => 'Logout',
-        'data' => json_encode('Logout: ' . $user->name),
-    ]);
+    public function logout()
+    {
+        $user = Auth::user();
+        AuditLog::create([
+            'user_id' => $user->id,
+            'action' => 'Logout in the system',
+            'data' => json_encode('Logout: ' . $user->name),
+        ]);
 
-    Auth::logout();
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
 
-    $request->session()->invalidate();
+        return redirect('/login');
 
-    $request->session()->regenerateToken();
+    }
 
-    return redirect('/login')->with('message', 'You have been logged out');
-}
 }

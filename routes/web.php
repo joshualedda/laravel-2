@@ -3,7 +3,6 @@
 use Livewire\Livewire;
 use App\Livewire\AddUser;
 use App\Livewire\Reports;
-use App\Livewire\Dashboard;
 use App\Livewire\AuditTrail;
 use App\Livewire\DataBackup;
 use App\Livewire\StudentAdd;
@@ -19,7 +18,6 @@ use App\Livewire\ViewGrantee;
 use App\Livewire\CampusCourse;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use Symfony\Component\HttpFoundation\Request;
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -33,25 +31,25 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::middleware(['guest'])->group(function () {
 
     // log in
-    Route::get('/auth/login', function () {
+    Route::get('/', function () {
         return view('auth.login');
     });
-    Route::get('/login', [ LoginController::class, 'login'])->name('auth.login');
-    Route::post('/login', [ LoginController::class, 'loginAction'])->name('login.action');
-    // Route::get('/logout', [ LoginController::class, 'logout'])->name('logout');
 
+Route::get('/login', [ LoginController::class, 'login'])->name('auth.login');
+Route::post('/login', [ LoginController::class, 'loginAction'])->name('login.action');
+Route::post('/logout', [ LoginController::class, 'logout'])->name('logout');
+
+Route::middleware('web')->group(function () {
+    // dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/grantees', [DashboardController::class, 'getStudents']);
+    // barChart
+    Route::get('/filter-data', [DashboardController::class, 'filterData']);
 });
 
-
-
-
-// dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-// barChart
-Route::post('/filter', [DashboardController::class, 'filterData']);
 
 
 // Student
@@ -103,4 +101,6 @@ Route::get('/programCampus', CampusCourse::class)->name('campus-course');
 Route::get('/schoolYear', SchoolYears::class)->name('school-year');
 
 // reports
+
 Route::get('/studentReports', Reports::class)->name('reports');
+// Route::get('/chart-data', [DashboardController::class, 'getChartData']);

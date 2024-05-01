@@ -7,9 +7,9 @@
                         Student Data
                     </div>
                     <div class="card-body">
-                        <form wire:submit.prevent="updateStudent">
+                        <form wire:submit="updateStudent">
                             @csrf
-                            {{-- @method('PUT') --}}
+                            @method('PUT')
                             <div class="row">
 
                                 <div class="col-md-3 mb-3">
@@ -159,7 +159,7 @@
                                     <label class="form-label">Province</label>
                                     <select class="form-select" wire:model="selectedProvince"
                                         name="selectedProvince">
-                                        <option value="" selected>Select Province</option>
+                                        <option selected>Select Province</option>
                                         @foreach ($provinces as $province)
                                         <option value="{{ $province->provCode }}">{{ $province->provDesc }}</option>
                                         @endforeach
@@ -175,7 +175,7 @@
                                     <label class="form-label">City/Municipality</label>
                                     <select class="form-select" wire:model.live="selectedMunicipality"
                                         name="selectedMunicipality">
-                                        <option value="" selected>Select City/Municipality</option>
+                                        <option selected>Select City/Municipality</option>
                                         @foreach ($municipalities as $municipality)
                                         <option value="{{ $municipality->citymunCode }}">{{ $municipality->citymunDesc
                                             }}</option>
@@ -192,7 +192,7 @@
                                     <label class="form-label">Barangay</label>
                                     <select class="form-select" wire:model.live="selectedBarangay"
                                         name="selectedBarangay">
-                                        <option value="" selected>Select Barangay</option>
+                                        <option selected>Select Barangay</option>
                                         @foreach ($barangays as $barangay)
                                         <option value="{{ $barangay->brgyCode }}">{{ $barangay->brgyDesc }}</option>
                                         @endforeach
@@ -442,7 +442,7 @@
                                         <i class="mdi mdi-close"></i>
                                         Reset
                                     </button>
-                                    <button type="submit" wire:loading.attr='disabled'
+                                    <button type="submit"
                                         class="btn btn-success btn-md fw-bold text-dark mt-2">
                                         <i class="mdi mdi-content-save"></i>
                                         Save

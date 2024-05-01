@@ -41,7 +41,7 @@ class ScholarEdit extends Component
         $user = Auth::user();
         AuditLog::create([
             'user_id' => $user->id,
-            'action' => 'Updated '. $data,
+            'action' => 'Updated '. $this->scholarship_name,
             'data' => json_encode('Updated by '. $user->name),
         ]);
 

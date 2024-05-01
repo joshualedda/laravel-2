@@ -162,10 +162,13 @@ use App\Livewire\AddUser;
     <!-- End Reports Nav -->
 
     <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="bi bi-arrow-left-circle"></i>
-            <span>Log out</span>
-        </a>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="nav-link">
+                <i class="bi bi-arrow-left-circle"></i>
+                <span>Log out</span>
+            </button>
+        </form>
     </li>
     <!-- End Log out Nav -->
 

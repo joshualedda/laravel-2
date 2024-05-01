@@ -38,10 +38,12 @@
                                     <div class="alert alert-danger lert-dismissible fade show" role="alert">
                                         <i class="fas fa-exclamation-triangle me-2"></i>
                                         <span>No record of the student.</span>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                     </div>
                                 </div>
                                 @endif
+
 
                                 <script>
                                     document.addEventListener("DOMContentLoaded", function()
@@ -96,11 +98,16 @@
                             </div>
 
 
-                            <div class="col-md-4 mx-3 my-1" id="newInput" style="display: @if ($showNewInput) block @else none @endif;">
-                                <label for="nameSchool"><span class="text-danger">*</span> If new, indicate name of school last attended:</label>
-                                <input type="text" class="form-control form-control-sm" name="nameSchool" id="nameSchool" wire:model.live="nameSchool">
-                                <label for="lastYear"><span class="text-danger">*</span> School year last attended:</label>
-                                <input type="text" class="form-control form-control-sm" name="lastYear" id="lastYear" wire:model.live="lastYear">
+                            <div class="col-md-4 mx-3 my-1" id="newInput"
+                                style="display: @if ($showNewInput) block @else none @endif;">
+                                <label for="nameSchool"><span class="text-danger">*</span> If new, indicate name of
+                                    school last attended:</label>
+                                <input type="text" class="form-control form-control-sm" name="nameSchool"
+                                    id="nameSchool" wire:model.live="nameSchool">
+                                <label for="lastYear"><span class="text-danger">*</span> School year last
+                                    attended:</label>
+                                <input type="text" class="form-control form-control-sm" name="lastYear" id="lastYear"
+                                    wire:model.live="lastYear">
                             </div>
 
 
@@ -148,11 +155,11 @@
                             <div class="row">
                                 <div class="col-md-4 position-relative mt-0">
                                     <label class="form-label">Province</label>
-                                    <select class="form-select" wire:model="selectedProvince"
+                                    <select class="form-select form-select-sm" wire:model.live="selectedProvince"
                                         name="selectedProvince">
-                                        <option value="" selected>Select Province</option>
+                                        <option value="" >Select Province</option>
                                         @foreach ($provinces as $province)
-                                        <option value="{{ $province->provCode }}">{{ $province->provDesc }}</option>
+                                            <option value="{{ $province->provCode }}" @if($province->provCode == $selectedProvince) selected @endif >{{ $province->provDesc }}</option>
                                         @endforeach
                                     </select>
                                     @error('selectedProvince')
@@ -164,12 +171,11 @@
 
                                 <div class="col-md-4 position-relative mt-0">
                                     <label class="form-label">City/Municipality</label>
-                                    <select class="form-select" wire:model.live="selectedMunicipality"
+                                    <select class="form-select form-select-sm" wire:model.live="selectedMunicipality"
                                         name="selectedMunicipality">
-                                        <option value="" selected>Select City/Municipality</option>
+                                        <option value="" >Select City/Municipality</option>
                                         @foreach ($municipalities as $municipality)
-                                        <option value="{{ $municipality->citymunCode }}">{{ $municipality->citymunDesc
-                                            }}</option>
+                                            <option value="{{ $municipality->citymunCode }}" @if($municipality->citymunCode == $selectedMunicipality) selected @endif >{{ $municipality->citymunDesc }}</option>
                                         @endforeach
                                     </select>
                                     @error('selectedMunicipality')
@@ -181,11 +187,11 @@
 
                                 <div class="col-md-4 position-relative mt-0">
                                     <label class="form-label">Barangay</label>
-                                    <select class="form-select" wire:model.live="selectedBarangay"
+                                    <select class="form-select form-select-sm" wire:model.live="selectedBarangay"
                                         name="selectedBarangay">
-                                        <option value="" selected>Select Barangay</option>
+                                        <option value="" >Select Barangay</option>
                                         @foreach ($barangays as $barangay)
-                                        <option value="{{ $barangay->brgyCode }}">{{ $barangay->brgyDesc }}</option>
+                                            <option value="{{ $barangay->brgyCode }}" @if($barangay->brgyCode == $selectedBarangay) selected @endif >{{ $barangay->brgyDesc }}</option>
                                         @endforeach
                                     </select>
                                     @error('selectedBarangay')
@@ -208,8 +214,7 @@
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input @error('sex') is-invalid @enderror"
-                                                type="radio" id="sex" value="Female" wire:model.live="sex"
-                                                name="sex">
+                                                type="radio" id="sex" value="Female" wire:model.live="sex" name="sex">
                                             <label class="form-check-label m-0" for="sex">Female</label>
                                         </div>
 
@@ -275,7 +280,7 @@
                                 <div class="col-md-3 position-relative mt-0">
                                     <label class="form-label">Year level</label>
                                     <select name="level" id="level"
-                                        class="@error('level') is-invalid @enderror form-select form-select-md text-center"
+                                        class="@error('level') is-invalid @enderror form-select form-select-sm text-center"
                                         wire:model.live="level">
                                         <option selected>Select year level</option>
                                         @foreach (['1','2','3','4','5','6'] as $yearLevel )
@@ -289,14 +294,14 @@
                                     @enderror
                                 </div>
 
-                                <!-- Course -->
+
                                 <div class="col-md-6 position-relative mt-0">
                                     <label class="form-label">Course</label>
-                                    <select class="form-select" id="selectedCourse" name="selectedCourse"
+                                    <select class="form-select form-select-sm" id="selectedCourse" name="selectedCourse"
                                         wire:model.live="selectedCourse">
                                         <option selected>Select Course</option>
                                         @foreach ($courses as $course)
-                                        <option value="{{ $course->course_id }}">{{ $course->course_name }}
+                                        <option value="{{ $course->course_id }}" @if($course->course_id == $selectedCourse) selected @endif >{{ $course->course_name }}
                                         </option>
                                         @endforeach
                                     </select>
@@ -340,7 +345,7 @@
                             {{-- end --}}
                             <div class="row mt-3">
                                 <div class="col-md-6 d-flex justify-content-center gap-4">
-                                    <button wire:click="resetForm"
+                                    <button type="submit" wire:click='resetForm'
                                         class="btn btn-warning btn-md fw-bold text-dark mt-2">
                                         <i class="mdi mdi-close"></i>
                                         Reset

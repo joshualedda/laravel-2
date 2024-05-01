@@ -111,8 +111,6 @@ class EditGrantee extends Component
     }
 
 
-
-
     public function updatedSelectedProvince($provinceId)
     {
         if ($provinceId) {
@@ -163,8 +161,7 @@ class EditGrantee extends Component
             'fundSources1' => $this->fundSources1,
             'fundSources2' => $this->fundSources2,
             'editStudent' => $this->editStudent,
-        ])->extends('layouts.includes.index')
-        ->section('content');
+        ])->extends('layouts.includes.index')->section('content');
     }
 
 
@@ -172,6 +169,21 @@ class EditGrantee extends Component
 
     public function updateStudent()
     {
+    // Validate input fields
+    $this->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,' . $this->userId,
+    ]);
 
+    // Update user record
+    $user = User::findOrFail($this->userId);
+    $user->name = $this->name;
+    $user->email = $this->email;
+    $user->save();
+
+    // Show success message
+    session()->flash('message', 'User updated successfully.');
     }
+
+ 
 }

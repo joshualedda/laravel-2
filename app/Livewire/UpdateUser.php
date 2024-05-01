@@ -30,20 +30,21 @@ class UpdateUser extends Component
         $this->role = $this->user->role;
     }
 
-    protected $rules = [
-        'name' => 'string|max:255',
-        'username' => 'string|max:255|unique:users,username',
-        'email' => 'string|email|max:255|unique:users,email',
-        'role' => 'in:1,0,2',
-        'password' => 'nullable|min:8|confirmed',
-    ];
-
     public function updateUser()
     {
 
-        $this->validate();
+        // $rules = [
+        //     'name' => 'string|max:255',
+        //     'username' => 'string|max:255|unique:users,username,' . $this->user->id,
+        //     'email' => 'string|email|max:255|unique:users,email,' . $this->user->id,
+        //     'role' => 'in:1,0,2',
+        //     'password' => 'nullable|min:8|confirmed',
+        // ];
+        // $this->validate($rules);
 
-         $data = [
+        $originalData = $this->user->toArray();
+
+        $data = [
             'name' => $this->name,
             'username' => $this->username,
             'email' => $this->email,
@@ -53,14 +54,25 @@ class UpdateUser extends Component
         if (!empty($this->password)) {
             $data['password'] = Hash::make($this->password);
         }
+
         $this->user->update($data);
-        session()->flash('success', 'User updated successfully!');
+
+        // $updatedData = array_diff_assoc($data, $originalData);
+
+        // $action = 'Updated: ';
+        // foreach ($updatedData as $key => $value) {
+        //     $action .= $key . ' from ' . $originalData[$key] . ' to ' . $value . ', ';
+        // }
+        // $action = rtrim($action, ', ');
+
         $user = Auth::user();
         AuditLog::create([
             'user_id' => $user->id,
-            'action' => 'Updated '. $data,
-            'data' => json_encode('Updated by '. $user->name),
+            'action' => json_encode('Updated data'),
+            'data' => json_encode('Updated by ' . $user->name),
         ]);
+
+        session()->flash('success', 'User updated successfully!');
     }
 
     public function render()

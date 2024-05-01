@@ -40,7 +40,7 @@ class StudentEdit extends Component
 
     public function fetchSchoolYears()
     {
-        $this->years = SchoolYear::orderBy('school_year', 'desc')->limit(5)->get();
+        $this->years = SchoolYear::orderBy('school_year', 'desc')->limit(8)->get();
     }
 
     public function mount($rowId)
@@ -58,17 +58,9 @@ class StudentEdit extends Component
             $this->sex= $this->student->sex;
             $this->status= $this->student->status;
             // Use join to get the related models
-            $this->selectedBarangay = Barangay::join('students', 'barangays.brgyCode', '=', 'students.barangay')
-                ->where('students.id', $this->student->id)
-                ->value('brgyDesc') ?? "No data";
-
-            $this->selectedMunicipality = Municipal::join('students', 'municipals.citymunCode', '=', 'students.municipal')
-                ->where('students.id', $this->student->id)
-                ->value('citymunDesc') ?? "No data";
-
-            $this->selectedProvince = Province::join('students', 'provinces.provCode', '=', 'students.province')
-                ->where('students.id', $this->student->id)
-                ->value('provDesc') ?? "No data";
+            $this->selectedBarangay =  $this->student->barangay;
+            $this->selectedMunicipality = $this->student->municipal;
+            $this->selectedProvince = $this->student->province;
 
             $this->selectedCampus = Campus::join('students', 'campuses.id', '=', 'students.campus')
             ->where('students.id', $this->student->id)
@@ -77,6 +69,16 @@ class StudentEdit extends Component
             $this->selectedCourse = Course::join('students', 'courses.course_id', '=', 'students.course')
             ->where('students.id', $this->student->id)
             ->value('course_name') ?? "No data";
+
+            $this->selectedBarangay = Barangay::join('students', 'barangays.brgyCode', '=', 'students.barangay')
+            ->where('students.id', $this->student->id)
+            ->value('brgyDesc') ?? "No data";
+            $this->selectedMunicipality = Municipal::join('students', 'municipals.citymunCode', '=', 'students.municipal')
+            ->where('students.id', $this->student->id)
+            ->value('citymunDesc') ?? "No data";
+            $this->selectedProvince = Province::join('students', 'provinces.provCode', '=', 'students.province')
+            ->where('students.id', $this->student->id)
+            ->value('provDesc') ?? "No data";
 
             $this->level= $this->student->level;
             $this->father= $this->student->father;
@@ -113,17 +115,6 @@ class StudentEdit extends Component
             $this->selectedfundsources2 = "No data";
         }
 
-
-
-            $this->provinces = Province::where('regCode', 01)->get();
-
-            $this->fundSources1 = ScholarshipName::where('scholarship_type', $this->selectedScholarshipType1)
-            ->where('status', 0)
-            ->get();
-
-            $this->fundSources2 = ScholarshipName::where('scholarship_type', $this->selectedScholarshipType2)
-            ->where('status', 0)
-            ->get();
         }
 
         public function updatedSelectedScholarshipType1($value)
@@ -139,28 +130,6 @@ class StudentEdit extends Component
                 ->get();
         }
 
-
-        public function updatedSelectedProvince($provinceId)
-        {
-            if ($provinceId) {
-                $this->municipalities = Municipal::where('provCode', $provinceId)->get();
-                $this->selectedMunicipality = null; // Reset municipality and barangay
-                $this->barangays = [];
-            } else {
-                $this->municipalities = [];
-                $this->selectedMunicipality = null;
-                $this->barangays = [];
-            }
-        }
-
-        public function updatedSelectedMunicipality($municipalityId)
-        {
-            if ($municipalityId) {
-                $this->barangays = Barangay::where('citymunCode', $municipalityId)->get();
-            } else {
-                $this->barangays = [];
-            }
-        }
 
 
     public function studentSearch()
@@ -213,16 +182,14 @@ class StudentEdit extends Component
             $this->lastYear = $this->existingStudent->lastYear ?? "No Data";
 
             $this->selectedBarangay = Barangay::join('students', 'barangays.brgyCode', '=', 'students.barangay')
-                ->where('students.id', $this->existingStudent->id)
-                ->value('brgyDesc') ?? "No data";
-
+            ->where('students.id', $this->student->id)
+            ->value('brgyDesc') ?? "No data";
             $this->selectedMunicipality = Municipal::join('students', 'municipals.citymunCode', '=', 'students.municipal')
-                ->where('students.id', $this->existingStudent->id)
-                ->value('citymunDesc') ?? "No data";
-
+            ->where('students.id', $this->student->id)
+            ->value('citymunDesc') ?? "No data";
             $this->selectedProvince = Province::join('students', 'provinces.provCode', '=', 'students.province')
-                ->where('students.id', $this->existingStudent->id)
-                ->value('provDesc') ?? "No data";
+            ->where('students.id', $this->student->id)
+            ->value('provDesc') ?? "No data";
 
             $this->level = $this->existingStudent->level;
             $this->father = $this->existingStudent->father;
@@ -265,6 +232,30 @@ class StudentEdit extends Component
     {
 
      $this->fetchSchoolYears();
+             // Fetch provinces from the database
+             $this->provinces = Province::where('regCode', 01)->get();
+
+             // Fetch municipalities based on the selected province
+             if ($this->selectedProvince) {
+                 $this->municipalities = Municipal::where('provCode', $this->selectedProvince)->get();
+             } else {
+                 $this->municipalities = [];
+             }
+
+             // Fetch barangays based on the selected municipality
+             if ($this->selectedMunicipality) {
+                 $this->barangays = Barangay::where('citymunCode', $this->selectedMunicipality)->get();
+             } else {
+                 $this->barangays = [];
+             }
+
+             $this->fundSources1 = ScholarshipName::where('scholarship_type', $this->selectedScholarshipType1)
+             ->where('status', 0)
+             ->get();
+
+             $this->fundSources2 = ScholarshipName::where('scholarship_type', $this->selectedScholarshipType2)
+             ->where('status', 0)
+             ->get();
 
         return view('livewire.student-edit',[
             'years' => $this->years,
@@ -328,16 +319,15 @@ class StudentEdit extends Component
 
         Notification::create([
             'user_id' => auth()->id(),
-            'data' => ('added_by ' . auth()->user()->getRoleText()), // Store role text
+            'data' => (auth()->user()->getRoleText()), // Store role text
         ]);
-        
+
         // Display appropriate success message
         $message = $scholarshipsCreatedCount > 1
             ? 'New grantees have been added successfully!'
             : ($scholarshipsCreatedCount > 0 ? 'New grantee has been added successfully!' : 'No changes made.');
-            
-        session()->flash('success', $message);
 
+        session()->flash('success', $message);
 
         // Log the action
         $user = Auth::user();

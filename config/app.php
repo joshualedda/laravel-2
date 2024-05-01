@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://127.0.0.1:8000'),
+    'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL'),
 
@@ -110,7 +110,7 @@ return [
     */
 
     'faker_locale' => 'en_US',
-
+    'encoding' => 'UTF-8',
     /*
     |--------------------------------------------------------------------------
     | Encryption Key

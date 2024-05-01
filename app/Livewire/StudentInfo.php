@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Campus;
+use App\Models\Notification;
+use App\Models\Course;
 use App\Models\Student;
 use Livewire\Component;
 use App\Models\AuditLog;
@@ -97,102 +99,111 @@ class StudentInfo extends Component
                     $this->resetForm();
 
                     $user = Auth::user();
+                    $userRole = Auth::user()->role;
                     AuditLog::create([
                         'user_id' => $user->id,
                         'action' => 'Added a new student',
-                        'data' => json_encode('Added by '. $user->name),
+                        'data' => json_encode('Added by ' . $user->name),
                     ]);
+                    
+                    $roleName = '';
+                    if ($userRole == 0) {
+                        $roleName = "Staff";
+                    } else if ($userRole == 1) {
+                        $roleName = "Admin";
+                    } else {
+                        $roleName = "Campus";
+                    }
+                    
+                    // Save notification
+                    Notification::create([
+                        'user_id' => $user->id,
+                        'action' => 'Added new student',
+                        'data' => json_encode($roleName . ' added new student'),
+                    ]);
+                    
     }
+
+
+    //ssave notifiction
 
     // seach
 
     public function studentSearch()
     {
-        $this->existingStudent = null; // Reset student data initially
-        $this->noStudentRecord = false; // Reset error flag
+        $this->reset(['existingStudent', 'noStudentRecord']); // Reset student data initially
 
         $studentId = $this->student_id;
-        
-        // Perform the student search logic based on the role and campus restrictions:
+
+        // Perform the student search logic based on the role and campus restrictions
         if (auth()->user()->role === 0 || auth()->user()->role === 1) {
+            $this->existingStudent = Student::where('student_id', $studentId)->first();
+        } else {
             $this->existingStudent = Student::where('student_id', $studentId)
-            ->first();
-            } else {
-            $this->existingStudent = Student::where('student_id', $studentId)
-            ->where('campus', 1)
-            ->first();
+                ->where('campus', 1)
+                ->first();
 
             // Add validation for users with roles other than 0 or 1
-            if ($this->existingStudent && $this->existingStudent->campus !== 1 ) {
+            if ($this->existingStudent && $this->existingStudent->campus !== 1) {
                 // Handle the error or add your custom logic
                 $error = 'Access Denied!';
                 session()->flash('error', $error);
             }
         }
-            // dd($this->existingStudent);
 
-        if (!$this->existingStudent) {
+if (!$this->existingStudent) {
             $this->noStudentRecord = true;
+            $this->resetForm();
         } else {
             // dd($this->existingStudent);
-            // If a student is found, display sample data:
-            $this->lastname = $this->existingStudent->lastname;
-            $this->firstname = $this->existingStudent->firstname;
-            $this->initial = $this->existingStudent->initial;
-            $this->sex = $this->existingStudent->sex;
-            $this->status = $this->existingStudent->status;
-            $this->email = $this->existingStudent->email;
-            $this->contact = $this->existingStudent->contact;
 
-            $this->selectedCampus = $this->existingStudent->campus;
-            $this->selectedCourse  = $this->existingStudent->course;
-            $this->selectedBarangay = $this->existingStudent->barangay;
+            $this->student_id = $this->existingStudent->student_id;
+            $this->lastname= $this->existingStudent->lastname;
+            $this->firstname= $this->existingStudent->firstname;
+            $this->initial= $this->existingStudent->initial;
+            $this->email= $this->existingStudent->email;
+            $this->sex= $this->existingStudent->sex;
+            $this->status= $this->existingStudent->status;
+            // Use join to get the related models
+            $this->selectedBarangay =  $this->existingStudent->barangay;
             $this->selectedMunicipality = $this->existingStudent->municipal;
             $this->selectedProvince = $this->existingStudent->province;
 
-            $this->studentType = $this->existingStudent->studentType;
-            $this->nameSchool = $this->existingStudent->nameSchool ?? "No Data";
-            $this->lastYear = $this->existingStudent->lastYear ?? "No Data";
+            $this->selectedCampus = $this->existingStudent->campus;
 
-            $this->level = $this->existingStudent->level;
-            $this->father = $this->existingStudent->father;
-            $this->mother = $this->existingStudent->mother;
-            
+            $this->selectedCourse = $this->existingStudent->course;
+
+            $this->level= $this->existingStudent->level;
+            $this->father= $this->existingStudent->father;
+            $this->mother= $this->existingStudent->mother;
+            $this->contact= $this->existingStudent->contact;
+            $this->studentType= $this->existingStudent->studentType;
+            $this->nameSchool = $this->existingStudent->nameSchool ?? "No data";
+            $this->lastYear= $this->existingStudent->lastYear ?? "No data";
         }
     }
 
 
-
-        public function mount()
-        {
-            $this->provinces = Province::where('regCode', 01)->get();
-        }
-
-        public function updatedSelectedProvince($provinceId)
-        {
-            if ($provinceId) {
-                $this->municipalities = Municipal::where('provCode', $provinceId)->get();
-                $this->selectedMunicipality = null; // Reset municipality and barangay
-                $this->barangays = [];
-            } else {
-                $this->municipalities = [];
-                $this->selectedMunicipality = null;
-                $this->barangays = [];
-            }
-        }
-
-        public function updatedSelectedMunicipality($municipalityId)
-        {
-            if ($municipalityId) {
-                $this->barangays = Barangay::where('citymunCode', $municipalityId)->get();
-            } else {
-                $this->barangays = [];
-            }
-        }
-
     // end
     public function render()
     {
+        // Fetch provinces from the database
+        $this->provinces = Province::where('regCode', 01)->get();
+
+        // Fetch municipalities based on the selected province
+        if ($this->selectedProvince) {
+            $this->municipalities = Municipal::where('provCode', $this->selectedProvince)->get();
+        } else {
+            $this->municipalities = [];
+        }
+
+        // Fetch barangays based on the selected municipality
+        if ($this->selectedMunicipality) {
+            $this->barangays = Barangay::where('citymunCode', $this->selectedMunicipality)->get();
+        } else {
+            $this->barangays = [];
+        }
+
 
             if (auth()->user()->role === 0 || auth()->user()->role === 1) {
                 $this->campuses = Campus::all();
@@ -210,10 +221,10 @@ class StudentInfo extends Component
         return view('livewire.student-info',[
             'existingStudent' => $this->existingStudent,
             'noStudentRecord' => $this->noStudentRecord,
-            'provinces' => $this->provinces,
+            // 'provinces' => $this->provinces,
         ])->extends('layouts.includes.index')->section('content');
     }
-    private function resetForm()
+    public function resetForm()
     {
         // Reset all form fields and properties
         $this->reset([
