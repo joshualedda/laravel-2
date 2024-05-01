@@ -5,7 +5,7 @@ use App\Livewire\AddUser;
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="{{ url('dashboard') }}">
+            <a class="nav-link collapsed " href="{{ url('dashboard') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -13,7 +13,7 @@ use App\Livewire\AddUser;
         <!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('student') }}">
+            <a class="nav-link collapsed" href="{{ url('student') }}">
                 <i class="bi bi-person-plus"></i>
                 <span>Student</span>
             </a>
@@ -154,7 +154,7 @@ use App\Livewire\AddUser;
     @endcan
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('studentReports') }}">
+        <a class="nav-link collapsed" href="{{ url('studentReports') }}">
             <i class="bi bi-clipboard-data"></i>
             <span>Reports</span>
         </a>
@@ -164,7 +164,7 @@ use App\Livewire\AddUser;
     <li class="nav-item">
         <form action="{{ route('logout') }}" method="POST">
             @csrf
-            <button type="submit" class="nav-link">
+            <button type="submit" class="nav-link collapsed">
                 <i class="bi bi-arrow-left-circle"></i>
                 <span>Log out</span>
             </button>

@@ -3,32 +3,30 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="d-flex align-items-start justify-content-start mb-2 p-2">
-                        <div class="gap-2">
+                    <div class="card-body">
 
-                            {{-- button in adding --}}
-                            <a class="btn btn-sm btn-success" href="{{ url('studentInfo') }}">
-                                Add Student
-                            </a>
-                            {{-- button in adding --}}
+                        <div class="d-flex justify-content-between mx-2">
+                            <h5 class="card-title">Students Data</h5>
 
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
-                                Import
-                            </button>
-
-
+                            <div>
+                                <button type="button" class="btn btn-sm btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    Import
+                                </button>
+                                <a class="btn btn-sm btn-success me-2" href="{{ url('studentInfo') }}">
+                                    Add Student
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body shadow-lg m-0">
-                        {{-- Powergrid --}}
+
+
+
+                    <div >
                         <livewire:student-table />
-                        {{-- Powergrid --}}
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
+            </div>
 
         <!-- Modal -->
         <div wire:ignore.self class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"

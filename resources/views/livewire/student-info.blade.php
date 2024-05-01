@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header" style="text-align: center; font-size:25px; font-weight: bold;">
-                        Student Data
+                    <div class="card-header fw-bold" >
+                        Add Student
                     </div>
                     <div class="card-body">
                         <form wire:submit.prevent="saveStudent">
@@ -344,22 +344,22 @@
                             </div>
                             {{-- end --}}
                             <div class="row mt-3">
-                                <div class="col-md-6 d-flex justify-content-center gap-4">
+                                <div class="d-flex justify-content-end gap-2">
                                     <button type="submit" wire:click='resetForm'
-                                        class="btn btn-warning btn-md fw-bold text-dark mt-2">
+                                        class="btn btn-warning btn-md mt-2">
                                         <i class="mdi mdi-close"></i>
                                         Reset
                                     </button>
-                                    <button type="submit" wire:loading.attr='disabled'
-                                        class="btn btn-success btn-md fw-bold text-dark mt-2">
-                                        <i class="mdi mdi-content-save"></i>
-                                        Save
-                                    </button>
-                                    <a type="button" class="btn btn-danger btn-md fw-bold text-dark mt-2"
-                                        href="{{ url('student') }}">
-                                        <i class="mdi mdi-close-circle"></i>
-                                        Cancel
-                                    </a>
+                                    <a type="button" class="btn btn-danger btn-md mt-2"
+                                    href="{{ url('student') }}">
+                                    <i class="mdi mdi-close-circle"></i>
+                                    Cancel
+                                </a>
+                                <button type="submit" wire:loading.attr='disabled'
+                                    class="btn btn-success btn-md mt-2">
+                                    <i class="mdi mdi-content-save"></i>
+                                    Save
+                                </button>
                                 </div>
                                 <div class="col-md-6">
                                     {{-- Display success message --}}

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header" style="text-align: center; font-size:25px; font-weight: bold;">
+                    <div class="card-header fw-bold">
                         Student Data
                     </div>
                     <div class="card-body">
@@ -53,7 +53,6 @@
                                         });
                             </script>
 
-                            {{-- id end --}}
                         </div>
 
                         <div class="row">
@@ -130,7 +129,7 @@
                             </div>
                         </div>
 
-                        <div class="row mx-3">
+                        <div class="row">
                             <div class="col-md-3 position-relative mt-3">
                                 <label class="form-label" for="sex">Sex</label>
                                 <input type="text" id="sex" class="form-control form-control-sm" wire:model.live="sex"
@@ -191,12 +190,13 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <form wire:submit.prevent="addScholarship">
-                                @csrf
-                                <h4>III. Scholarships</h4>
+
+                        <form wire:submit.prevent="addScholarship">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                @csrf
+                                <p class="fw-bold fs-5">III. Scholarships</p>
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <label class="form-label mb-1" for="semester">Semester</label>
                                         <select wire:model.live="semester" class="form-select form-select-sm mb-2">
                                             <option selected>Select semester</option>
@@ -206,7 +206,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label class="form-label mb-1" for="selectedYear">School
                                             Year</label>
                                         <select wire:model.live="school_year" class="form-select form-select-sm">
@@ -220,104 +220,93 @@
                                 </div>
 
                                 {{-- Start --}}
-                                <div class="row mt-2 mx-2 mb-3">
-                                    <div class="row">
-                                        <div class="col-12 col-md-12">
-                                            <div class="d-flex justify-content-center gap-5 ">
-                                                <div class="grid col-6 col-md-6">
-                                                    <!-- Scholarship 1 -->
-                                                    <div class="mb-2 mt-2">
-                                                        <label class="mb-2">Scholarship Type</label>
-                                                        <select wire:model.live="selectedScholarshipType1"
-                                                            class="form-select form-select-sm mb-2">
-                                                            <option selected>Select Scholarship Type
-                                                            </option>
-                                                            <option value="0">Government</option>
-                                                            <option value="1">Private</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-2 mt-2">
-                                                        <label class="mb-2">Fund Sources</label>
-                                                        <select class="form-select form-select-sm"
-                                                            wire:model.live="selectedfundsources1">
-                                                            <option selected>Select Fund Source</option>
-                                                            @foreach($fundSources1 as $source )
-                                                            <option value="{{ $source->id }}">{{ $source->name }}
-                                                            </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
 
 
-                                                {{-- scholarship 2 --}}
-
-                                                <div class="grid col-6 col-md-6">
-                                                    <!-- Scholarship 2 -->
-                                                    <div class="mb-2 mt-2">
-                                                        <label class="mb-2">Scholarship Type</label>
-                                                        <select wire:model.live="selectedScholarshipType2"
-                                                            class="form-select form-select-sm mb-2">
-                                                            <option selected>Select Scholarship Type</option>
-                                                            <option value="0">Government</option>
-                                                            <option value="1">Private</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-2 mt-2">
-                                                        <label class="mb-2">Fund Sources</label>
-                                                        <select class="form-select form-select-sm"
-                                                            wire:model.live="selectedfundsources2">
-                                                            <option selected>Select Fund Source</option>
-                                                            @foreach($fundSources2 as $source)
-                                                            <option value="{{ $source->id }}">{{ $source->name }}
-                                                            </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-
+                                <div class="row mt-2 mb-3">
+                                    <div class="col-12 col-md-6">
+                                        <!-- Scholarship 1 -->
+                                        <div class="grid">
+                                            <div class="mb-2 mt-2">
+                                                <label class="mb-2">Scholarship Type</label>
+                                                <select wire:model.live="selectedScholarshipType1" class="form-select form-select-sm mb-2">
+                                                    <option selected>Select Scholarship Type</option>
+                                                    <option value="0">Government</option>
+                                                    <option value="1">Private</option>
+                                                </select>
                                             </div>
-
-                                        </div>
-
-                                        <div class="row mt-3">
-                                            <div class="col-md-6 d-flex justify-content-center gap-4">
-                                                {{-- <button wire:click="resetForm"
-                                                    class="btn btn-warning btn-md fw-bold text-dark mt-2">
-                                                    <i class="mdi mdi-close"></i>
-                                                    Reset
-                                                </button> --}}
-                                                <button type="submit" wire:loading.attr='disabled'
-                                                    class="btn btn-success btn-md fw-bold text-dark mt-2">
-                                                    <i class="mdi mdi-content-save"></i>
-                                                    Save
-                                                </button>
-                                                <a type="button" class="btn btn-danger btn-md fw-bold text-dark mt-2"
-                                                    href="{{ url('student') }}">
-                                                    <i class="mdi mdi-close-circle"></i>
-                                                    Cancel
-                                                </a>
-                                            </div>
-                                            <div class="col-md-6">
-                                                {{-- Display success message --}}
-                                                @if (session()->has('success'))
-                                                <div class="alert alert-success text-center">
-                                                    {{ session('success') }}
-                                                </div>
-                                                @endif
-                                                @if (session()->has('error'))
-                                                <div class="alert alert-danger text-center">
-                                                    {{ session('error') }}
-                                                </div>
-                                                @endif
-                                                {{-- ends here --}}
+                                            <div class="mb-2 mt-2">
+                                                <label class="mb-2">Fund Sources</label>
+                                                <select class="form-select form-select-sm" wire:model.live="selectedfundsources1">
+                                                    <option selected>Select Fund Source</option>
+                                                    @foreach($fundSources1 as $source)
+                                                        <option value="{{ $source->id }}">{{ $source->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
-
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <!-- Scholarship 2 -->
+                                        <div class="grid">
+                                            <div class="mb-2 mt-2">
+                                                <label class="mb-2">Scholarship Type</label>
+                                                <select wire:model.live="selectedScholarshipType2" class="form-select form-select-sm mb-2">
+                                                    <option selected>Select Scholarship Type</option>
+                                                    <option value="0">Government</option>
+                                                    <option value="1">Private</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-2 mt-2">
+                                                <label class="mb-2">Fund Sources</label>
+                                                <select class="form-select form-select-sm" wire:model.live="selectedfundsources2">
+                                                    <option selected>Select Fund Source</option>
+                                                    @foreach($fundSources2 as $source)
+                                                        <option value="{{ $source->id }}">{{ $source->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+
+                            </div>
+
+
+
+
+                                <div class="d-flex justify-content-end gap-2 mx-4">
+
+                                    <a type="button" class="btn btn-danger btn-md fw-bold text-white mt-2" href="{{ url('student') }}">
+                                        <i class="mdi mdi-close-circle"></i>
+                                        Cancel
+                                    </a>
+                                    <button type="submit" wire:loading.attr='disabled' class="btn btn-success btn-md fw-bold text-white mt-2">
+                                        <i class="mdi mdi-content-save"></i>
+                                        Save
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    {{-- Display success message --}}
+                                    @if (session()->has('success'))
+                                        <div class="alert alert-success text-center">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
+                                    @if (session()->has('error'))
+                                        <div class="alert alert-danger text-center">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
+                                    {{-- ends here --}}
+                                </div>
+
+
+
+
                             </form>
-                        </div>
+
+
                     </div>
                 </div>
             </div>

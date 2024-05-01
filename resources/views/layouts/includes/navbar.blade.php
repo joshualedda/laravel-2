@@ -1,4 +1,4 @@
-
+{{-- fix color scheme --}}
     @if (Auth::user()->role === 1)
         <style>
             #header {
@@ -45,7 +45,7 @@
                     <!-- End Notification Dropdown Items -->
                     <livewire:notifications-dropdown>
                     <!-- End Notification Nav -->
-                    
+
 
                 </li>
             @endcan
